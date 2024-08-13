@@ -3,6 +3,7 @@ import { Component, OnInit, signal } from '@angular/core';
 import { ConsumerService } from '../../application/consumer.service';
 import { CountCardsComponent } from '../../../shared/components/countCards/components/countCards/countCards.component';
 import { CustomTableComponent } from '../../../shared/components/customTable/components/customTable/customTable.component';
+import { Router } from '@angular/router';
 
 export interface Element {
   name: string;
@@ -19,7 +20,10 @@ export class ConsumersComponent implements OnInit {
   public elementData = signal<Element[]>([]);
   public columnDefinitions = [{ key: 'name', header: 'Nombre' }];
 
-  constructor(private consumerService: ConsumerService) {}
+  constructor(
+    private consumerService: ConsumerService,
+    private route: Router
+  ) {}
 
   ngOnInit() {
     this.getConsumers();
@@ -38,6 +42,7 @@ export class ConsumersComponent implements OnInit {
   }
 
   handleSearch(element: Element) {
+    this.route.navigate(['/topics', element.name]);
     console.log('Selected element:', element);
   }
 }

@@ -17,7 +17,7 @@ export const routes: Routes = [
     children: [
       { path: 'home', component: DashboardComponent },
       { path: 'consumers', component: ConsumersComponent },
-      { path: 'topics', component: TopicsComponent },
+      { path: 'topics/:consumer', component: TopicsComponent },
       { path: 'brokers', component: BrokersComponent },
       { path: 'partitions', component: PartitionsComponent },
       { path: '**', redirectTo: 'home' },

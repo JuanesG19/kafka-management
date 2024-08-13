@@ -1,14 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 
+import { ActivatedRoute } from '@angular/router';
 import { CountCardsComponent } from '../../../shared/components/countCards/components/countCards/countCards.component';
 import { CustomTableComponent } from '../../../shared/components/customTable/components/customTable/customTable.component';
+import { TopicsService } from '../../application/services/topics.service';
 
 export interface Element {
-  nombre: string;
-  particiones: number;
-  prefered: number;
-  replicadas: number;
-  otros: number;
+  name: string;
 }
 
 @Component({
@@ -19,34 +17,31 @@ export interface Element {
   imports: [CountCardsComponent, CustomTableComponent],
 })
 export class TopicsComponent implements OnInit {
-  ngOnInit() {}
+  public idConsumer = signal<string>('');
+  public elementData = signal<Element[]>([]);
+  public columnDefinitions = [{ key: 'name', header: 'Nombre' }];
 
-  elementData: Element[] = [
-    { nombre: 'Juan', particiones: 1, prefered: 2, replicadas: 3, otros: 4 },
-    { nombre: 'Pedro', particiones: 5, prefered: 6, replicadas: 7, otros: 8 },
-    { nombre: 'Luisa', particiones: 1, prefered: 2, replicadas: 3, otros: 4 },
-    { nombre: 'Marco', particiones: 5, prefered: 6, replicadas: 7, otros: 8 },
-    { nombre: 'Marco 1', particiones: 1, prefered: 2, replicadas: 3, otros: 4 },
-    { nombre: 'Juan 2', particiones: 5, prefered: 6, replicadas: 7, otros: 8 },
-    { nombre: 'Pedro 1', particiones: 1, prefered: 2, replicadas: 3, otros: 4 },
-    { nombre: 'Luisa 2', particiones: 5, prefered: 6, replicadas: 7, otros: 8 },
-    { nombre: 'Marco 1', particiones: 1, prefered: 2, replicadas: 3, otros: 4 },
-    { nombre: 'Pedro 2', particiones: 5, prefered: 6, replicadas: 7, otros: 8 },
-    { nombre: 'Luisa 1', particiones: 1, prefered: 2, replicadas: 3, otros: 4 },
-    { nombre: 'Juan 2', particiones: 5, prefered: 6, replicadas: 7, otros: 8 },
-    { nombre: 'Marco 1', particiones: 1, prefered: 2, replicadas: 3, otros: 4 },
-    { nombre: 'Luisa 2', particiones: 5, prefered: 6, replicadas: 7, otros: 8 },
-    { nombre: 'Juan 1', particiones: 1, prefered: 2, replicadas: 3, otros: 4 },
-    { nombre: 'Pedro 2', particiones: 5, prefered: 6, replicadas: 7, otros: 8 },
-  ];
+  constructor(
+    private route: ActivatedRoute,
+    private topicsService: TopicsService
+  ) {}
 
-  columnDefinitions = [
-    { key: 'nombre', header: 'Nombre' },
-    { key: 'particiones', header: 'Particiones' },
-    { key: 'prefered', header: 'Prefered' },
-    { key: 'replicadas', header: 'Replicadas' },
-    { key: 'otros', header: 'Otros' },
-  ];
+  ngOnInit() {
+    this.route.paramMap.subscribe((params) => {
+      const consumer = params.get('consumer') ?? '';
+      this.idConsumer.set(consumer);
+      this.topicsService.getTopicsByTerm('b').subscribe({
+        next: (res: string[]) => {
+          const transformedData = res.map((item) => ({
+            name: item,
+          }));
+
+          this.elementData.set(transformedData);
+        },
+      });
+      console.log('TOPICS BY BD', this.elementData());
+    });
+  }
 
   handleSearch(element: Element) {
     console.log('Selected element:', element);

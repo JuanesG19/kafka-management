@@ -5,9 +5,9 @@
     </div>
     <div class="mt-5">
       <app-customTable
-        [data]="elementData"
+        [data]="elementData()"
         [columns]="columnDefinitions"
-        [columnName]="'Topic'"
+        [columnName]="'Topic: ' + idConsumer()"
         (search)="handleSearch($event)"
       ></app-customTable>
     </div>
