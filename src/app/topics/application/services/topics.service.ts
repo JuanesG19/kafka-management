@@ -12,4 +12,9 @@ export class TopicsService {
   getTopicsByTerm(term: string): Observable<any> {
     return this.topicsHttpService.getTopicsByTerm(term);
   }
+
+    /* TODO -> Hay que tiparlo cuando se defina el objeto */
+    getTopics(): Observable<any> {
+      return this.topicsHttpService.getTopics();
+    }
 }

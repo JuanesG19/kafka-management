@@ -7,19 +7,13 @@ import { environment } from '../../../../environments/environment';
 @Injectable({
   providedIn: 'root',
 })
-export class TopicsHttpService {
+export class PartitionsHttpService {
   private http = inject(HttpClient);
   private url: string = `${environment.url.domain}/platform/kafka`;
 
   /* TODO -> Hay que tiparlo cuando se defina el objeto */
-  getTopicsByTerm(term: string): Observable<any> {
-    const url = `${this.url}/topics/search?searchTerm=${term}`;
-    return this.http.get<any>(url);
-  }
-
-  /* TODO -> Hay que tiparlo cuando se defina el objeto */
-  getTopics():Observable<any>{
-    const url = `${this.url}/topics`;
+  getPartitions(term : string):Observable<any>{
+    const url = `${this.url}/topics/${term}/partitions/details`;
     return this.http.get<any>(url);
   }
 }

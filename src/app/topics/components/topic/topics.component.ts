@@ -1,6 +1,6 @@
 import { Component, OnInit, signal } from '@angular/core';
 
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CountCardsComponent } from '../../../shared/components/countCards/components/countCards/countCards.component';
 import { CustomTableComponent } from '../../../shared/components/customTable/components/customTable/customTable.component';
 import { TopicsService } from '../../application/services/topics.service';
@@ -23,12 +23,16 @@ export class TopicsComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private topicsService: TopicsService
+    private topicsService: TopicsService,
+      private route2: Router
   ) {}
 
   ngOnInit() {
     this.route.paramMap.subscribe((params) => {
-      const consumer = params.get('consumer') ?? '';
+      const consumer = params.get('consumer')?? '';
+      if(consumer ==''){
+        this.generalSearch();
+      }else{
       this.idConsumer.set(consumer);
       this.topicsService.getTopicsByTerm('b').subscribe({
         next: (res: string[]) => {
@@ -38,12 +42,27 @@ export class TopicsComponent implements OnInit {
 
           this.elementData.set(transformedData);
         },
-      });
+      });}
       console.log('TOPICS BY BD', this.elementData());
     });
   }
 
+  generalSearch(){
+    this.topicsService.getTopics().subscribe({
+      next: (res: string[]) => {
+        const transformedData = res.map((item) => ({
+          name: item,
+        }));
+        this.elementData.set(transformedData);
+        console.log(res)
+      },
+    });
+  }
+
+
+
   handleSearch(element: Element) {
+    this.route2.navigate(['/partitions', element.name]);
     console.log('Selected element:', element);
   }
 }
