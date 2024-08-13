@@ -1,7 +1,7 @@
 import { Component, OnInit, signal } from '@angular/core';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 
-import { DashboardService } from '../../../../dashboard/application/services/dashboard.service';
+import { DashboardService } from '../../../../../dashboard/application/services/dashboard.service';
 
 @Component({
   selector: 'app-countCards',

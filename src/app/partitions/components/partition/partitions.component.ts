@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
-import { CountCardsComponent } from '../../../shared/countCards/components/countCards/countCards.component';
-import { CustomTableComponent } from '../../../shared/customTable/components/customTable/customTable.component';
+import { CountCardsComponent } from '../../../shared/components/countCards/components/countCards/countCards.component';
+import { CustomTableComponent } from '../../../shared/components/customTable/components/customTable/customTable.component';
 
 export interface Element {
   nombre: string;

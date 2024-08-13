@@ -1,8 +1,8 @@
 import { Component, OnInit, signal } from '@angular/core';
 
 import { ConsumerService } from '../../application/consumer.service';
-import { CountCardsComponent } from '../../../shared/countCards/components/countCards/countCards.component';
-import { CustomTableComponent } from '../../../shared/customTable/components/customTable/customTable.component';
+import { CountCardsComponent } from '../../../shared/components/countCards/components/countCards/countCards.component';
+import { CustomTableComponent } from '../../../shared/components/customTable/components/customTable/customTable.component';
 
 export interface Element {
   name: string;
