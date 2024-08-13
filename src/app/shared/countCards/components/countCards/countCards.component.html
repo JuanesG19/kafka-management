@@ -1,0 +1,14 @@
+<div class="panel-container">
+  <a routerLink="/consumers" class="panel">
+    <div class="title text-secondary">Consumers</div>
+    <div class="value text-primary">{{ brokers() }}</div>
+  </a>
+  <a routerLink="/topics" class="panel">
+    <div class="title text-secondary">Topics</div>
+    <div class="value text-primary">{{ topics() }}</div>
+  </a>
+  <a routerLink="/partitions" class="panel">
+    <div class="title text-secondary">Partitions</div>
+    <div class="value text-primary">{{ partitions() }}</div>
+  </a>
+</div>

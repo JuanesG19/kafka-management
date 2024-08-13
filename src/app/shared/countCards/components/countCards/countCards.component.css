@@ -1,0 +1,35 @@
+.panel-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.panel {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex: 1 1 200px;
+  min-width: 200px;
+}
+
+.panel:hover {
+  background-color: #d9eaf3;
+  border: 1px solid #79B2D7;
+}
+
+.panel .title {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.panel .value {
+  font-size: 24px;
+  font-weight: bold;
+}

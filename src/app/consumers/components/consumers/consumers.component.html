@@ -1,0 +1,15 @@
+<div class="flex-1 h-full">
+  <div class="mx-10 pt-5">
+    <div>
+      <app-countCards></app-countCards>
+    </div>
+    <div class="mt-5">
+      <app-customTable
+        [data]="elementData()"
+        [columns]="columnDefinitions"
+        [columnName]="'Consumers'"
+        (search)="handleSearch($event)"
+      ></app-customTable>
+    </div>
+  </div>
+</div>

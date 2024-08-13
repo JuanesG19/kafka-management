@@ -1,0 +1,26 @@
+<mat-drawer-container class="flex-1 h-full">
+  <mat-drawer #drawer mode="side" opened class="h-full max-w-56">
+    <mat-toolbar
+      class="drawer-header flex justify-between items-center bg-gray-900 text-white"
+    >
+      <div class="drawer-title text-lg font-bold">Menu</div>
+      <mat-icon
+        class="drawer-close cursor-pointer text-2xl"
+        (click)="drawer.close()"
+        >close</mat-icon
+      >
+    </mat-toolbar>
+    <mat-divider class="drawer-divider bg-gray-700"></mat-divider>
+    <div class="drawer-content flex flex-col flex-1 p-4">
+      <a routerLink="/home" class="drawer-link">Home</a>
+      <a routerLink="/consumers" class="drawer-link">Consumers</a>
+      <a routerLink="/topics" class="drawer-link">Topics</a>
+      <a routerLink="/partitions" class="drawer-link">Partitions</a>
+    </div>
+  </mat-drawer>
+
+  <mat-drawer-content>
+    <app-navbar (toggleDrawer)="drawer.toggle()"></app-navbar>
+    <router-outlet class="flex-1 overflow-y-auto"></router-outlet>
+  </mat-drawer-content>
+</mat-drawer-container>
