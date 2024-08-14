@@ -1,16 +1,20 @@
 import { Component, OnInit, signal } from '@angular/core';
-
 import { CountCardsComponent } from '../../../shared/components/countCards/components/countCards/countCards.component';
 import { CustomTableComponent } from '../../../shared/components/customTable/components/customTable/customTable.component';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PartitionsService } from '../../application/services/partition.service';
 
+
 export interface Element {
   nombre: string;
-  particiones: number;
-  prefered: number;
-  replicadas: number;
-  otros: number;
+  size: number;
+  lastOffset: number;
+  replicaNodes: number;
+  leaderNode: string;
+  offlineReplicaNodes:number;
+  firstOffset: number;
+  inSyncReplicaNodes : number;
+
 }
 
 @Component({
@@ -24,16 +28,19 @@ export class PartitionsComponent implements OnInit {
   public elementData = signal<Element[]>([]);
   public columnDefinitions = [
     { key: 'nombre', header: 'Nombre' },
-    { key: 'particiones', header: 'Particiones' },
-    { key: 'prefered', header: 'Prefered' },
-    { key: 'replicadas', header: 'Replicadas' },
-    { key: 'otros', header: 'Otros' }];
+    { key: 'size', header: 'Tamaño' },
+    { key: 'lastOffset', header: 'Posición' },
+    { key: 'replicaNodes', header: 'Nodos Réplica' },
+    { key: 'leaderNode', header: 'BrokerId' },
+    { key: 'offlineReplicaNodes', header: 'Nodos Réplica Offline' },
+    { key: 'firstOffset', header: 'Inicio' },
+    { key: 'inSyncReplicaNodes', header: 'Nodos Replica Sincronizados' }
+  ];
 
 
 
   constructor(    private route: ActivatedRoute,
-    private partitionService : PartitionsService,
-      private route2: Router) {}
+    private partitionService : PartitionsService) {}
 
   ngOnInit() {
     this.route.paramMap.subscribe((params) => {
@@ -44,21 +51,23 @@ export class PartitionsComponent implements OnInit {
           const transformedData = Object.keys(res).map((key) => {
             const partition = res[key];
             return {
-              nombre: key,  
-              particiones: partition.size,
-              prefered: partition.leaderNode, 
-              replicadas: partition.replicaNodes.length, 
-              otros: partition.offlineReplicaNodes.length
+              nombre: key,
+              size: partition.size,
+              lastOffset: partition.lastOffset,
+              replicaNodes: partition.replicaNodes.length,
+              leaderNode: partition.leaderNode,
+              offlineReplicaNodes: partition.offlineReplicaNodes.length,
+              firstOffset: partition.firstOffset,
+              inSyncReplicaNodes: partition.inSyncReplicaNodes
             };
           });
-
           this.elementData.set(transformedData);
         },
       });
       console.log('partitions BY BD', this.elementData());
-    });
-    
+    }); 
   }
+
 
   handleSearch(element: Element) {
     console.log('Selected element:', element);
