@@ -13,7 +13,14 @@ export class PartitionsHttpService {
 
   /* TODO -> Hay que tiparlo cuando se defina el objeto */
   getPartitions(term : string):Observable<any>{
-    const url = `${this.url}/topics/${term}/partitions/details`;
+    const url = `${this.url}/topics/${term}/partitions/details/byTopic`;
     return this.http.get<any>(url);
   }
+
+  /* TODO -> Hay que tiparlo cuando se defina el objeto */
+  getAllPartitions(): Observable<any>{
+    const url = `${this.url}/partitions`;
+    return this.http.get<any>(url);
+  }
+
 }

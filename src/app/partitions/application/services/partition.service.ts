@@ -9,7 +9,13 @@ export class PartitionsService {
   constructor(private partitionHttpService: PartitionsHttpService) {}
 
     /* TODO -> Hay que tiparlo cuando se defina el objeto */
-    getPartition(term: string): Observable<any> {
+    getPartitions(term: string): Observable<any> {
       return this.partitionHttpService.getPartitions(term);
     }
+
+    /* TODO -> Hay que tiparlo cuando se defina el objeto */
+    getAllPartitions(): Observable<any>{
+      return this.partitionHttpService.getAllPartitions();
+    }
+
 }

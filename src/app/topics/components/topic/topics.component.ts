@@ -8,7 +8,7 @@ import { ITopic } from '../../../shared/domains/ITopic';
 import { TopicsService } from '../../application/services/topics.service';
 
 export interface Element {
-  name: string;
+  topicName: string;
 }
 
 @Component({
@@ -71,7 +71,8 @@ export class TopicsComponent implements OnInit {
   }
 
   handleSearch(element: Element) {
-    this.router.navigate(['/partitions', element.name]);
-    //console.log('Selected element:', element);
+    console.log(element)
+    this.router.navigate(['/partitions', element.topicName]);
+    console.log('Selected element:', element);
   }
 }
