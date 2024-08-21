@@ -13,18 +13,18 @@ export class DashboardHttpService {
 
   constructor() {}
 
-  getBrokers(): Observable<number> {
-    const url = `${this.url}/consumers/count`;
+  getConsumers(): Observable<number> {
+    const url = `${this.url}/consumer-count`;
     return this.http.get<number>(url);
   }
 
   getTopics(): Observable<number> {
-    const url = `${this.url}/topics/count`;
+    const url = `${this.url}/topic-count`;
     return this.http.get<number>(url);
   }
 
   getPartitions(): Observable<number> {
-    const url = `${this.url}/topics/test/partitions/count`;
+    const url = `${this.url}/partition-count`;
     return this.http.get<number>(url);
   }
 

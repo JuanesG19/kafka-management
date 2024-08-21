@@ -1,4 +1,4 @@
-<div class="bg-white table-container">
+<div class="bg-white table-container flex flex-col">
   <div class="flex-1 flex justify-between bg-primary rounded-t-lg pt-4">
     <div class="flex-1 flex ml-5 pt-4">
       <div class="text-2xl font-semibold text-white">{{ columnName }}</div>
@@ -18,16 +18,20 @@
 
   <mat-table [dataSource]="dataSource" matSort class="custom-table">
     <ng-container *ngFor="let column of columns" [matColumnDef]="column.key">
-      <mat-header-cell *matHeaderCellDef mat-sort-header>
+      <mat-header-cell *matHeaderCellDef mat-sort-header class="text-center">
         {{ column.header }}
       </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{ element[column.key] }} </mat-cell>
+      <mat-cell *matCellDef="let element" class="text-center">
+        {{ element[column.key] }}
+      </mat-cell>
     </ng-container>
 
     <!-- Columna de acciones -->
     <ng-container matColumnDef="actions">
-      <mat-header-cell *matHeaderCellDef> Acciones </mat-header-cell>
-      <mat-cell *matCellDef="let element">
+      <mat-header-cell *matHeaderCellDef class="text-center">
+        Acciones
+      </mat-header-cell>
+      <mat-cell *matCellDef="let element" class="text-center">
         <button
           (click)="onSearch(element)"
           mat-icon-button
@@ -48,6 +52,7 @@
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
   </mat-table>
+
   <div class="custom-paginator">
     <mat-paginator
       [pageSizeOptions]="[5, 10, 25]"

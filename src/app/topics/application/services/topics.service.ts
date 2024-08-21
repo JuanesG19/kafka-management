@@ -1,3 +1,4 @@
+import { ITopic } from '../../../shared/domains/ITopic';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { TopicsHttpService } from '../../infrastructure/http/topics-http.service';
@@ -8,13 +9,11 @@ import { TopicsHttpService } from '../../infrastructure/http/topics-http.service
 export class TopicsService {
   constructor(private topicsHttpService: TopicsHttpService) {}
 
-  /* TODO -> Hay que tiparlo cuando se defina el objeto */
-  getTopicsByTerm(term: string): Observable<any> {
-    return this.topicsHttpService.getTopicsByTerm(term);
+  getTopics(): Observable<ITopic[]> {
+    return this.topicsHttpService.getTopics();
   }
 
-    /* TODO -> Hay que tiparlo cuando se defina el objeto */
-    getTopics(): Observable<any> {
-      return this.topicsHttpService.getTopics();
-    }
+  getTopicsByTerm(term: string): Observable<ITopic[]> {
+    return this.topicsHttpService.getTopicsByTerm(term);
+  }
 }

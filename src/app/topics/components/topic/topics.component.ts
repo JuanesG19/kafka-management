@@ -1,8 +1,10 @@
+import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit, signal } from '@angular/core';
 
-import { ActivatedRoute, Router } from '@angular/router';
 import { CountCardsComponent } from '../../../shared/components/countCards/components/countCards/countCards.component';
 import { CustomTableComponent } from '../../../shared/components/customTable/components/customTable/customTable.component';
+import { GlobalLoadingComponent } from '../../../shared/components/globalLoading/components/globalLoading/globalLoading.component';
+import { ITopic } from '../../../shared/domains/ITopic';
 import { TopicsService } from '../../application/services/topics.service';
 
 export interface Element {
@@ -14,55 +16,62 @@ export interface Element {
   templateUrl: './topics.component.html',
   styleUrls: ['./topics.component.css'],
   standalone: true,
-  imports: [CountCardsComponent, CustomTableComponent],
+  imports: [CountCardsComponent, CustomTableComponent, GlobalLoadingComponent],
 })
 export class TopicsComponent implements OnInit {
   public idConsumer = signal<string>('');
-  public elementData = signal<Element[]>([]);
-  public columnDefinitions = [{ key: 'name', header: 'Nombre' }];
+  public elementData = signal<ITopic[]>([]);
+  public loading = signal<boolean>(true);
+
+  public columnDefinitions = [
+    { key: 'topicName', header: 'topicName' },
+    { key: 'totalPartitions', header: 'totalPartitions' },
+    { key: 'totalMessages', header: 'totalMessages' },
+    { key: 'consumers', header: 'consumers' },
+  ];
 
   constructor(
     private route: ActivatedRoute,
     private topicsService: TopicsService,
-      private route2: Router
+    private router: Router
   ) {}
 
   ngOnInit() {
-    this.route.paramMap.subscribe((params) => {
-      const consumer = params.get('consumer')?? '';
-      if(consumer ==''){
-        this.generalSearch();
-      }else{
-      this.idConsumer.set(consumer);
-      this.topicsService.getTopicsByTerm('b').subscribe({
-        next: (res: string[]) => {
-          const transformedData = res.map((item) => ({
-            name: item,
-          }));
+    this.loading.set(true);
 
-          this.elementData.set(transformedData);
-        },
-      });}
+    this.route.paramMap.subscribe((params) => {
+      const consumer = params.get('consumer') ?? '';
+      console.log('CONSUMER PARAM', consumer);
+
+      if (consumer == '') {
+        this.idConsumer.set('General');
+        this.generalSearch();
+      } else {
+        this.idConsumer.set(consumer);
+        this.topicsService.getTopicsByTerm(consumer).subscribe({
+          next: (res: ITopic[]) => {
+            this.elementData.set(res);
+          },
+          complete: () => this.loading.set(false),
+          error: () => this.loading.set(false),
+        });
+      }
       console.log('TOPICS BY BD', this.elementData());
     });
   }
 
-  generalSearch(){
+  generalSearch() {
     this.topicsService.getTopics().subscribe({
-      next: (res: string[]) => {
-        const transformedData = res.map((item) => ({
-          name: item,
-        }));
-        this.elementData.set(transformedData);
-        console.log(res)
+      next: (res: ITopic[]) => {
+        this.elementData.set(res);
       },
+      complete: () => this.loading.set(false),
+      error: () => this.loading.set(false),
     });
   }
 
-
-
   handleSearch(element: Element) {
-    this.route2.navigate(['/partitions', element.name]);
-    console.log('Selected element:', element);
+    this.router.navigate(['/partitions', element.name]);
+    //console.log('Selected element:', element);
   }
 }

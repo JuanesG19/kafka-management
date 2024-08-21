@@ -1,6 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 
 import { HttpClient } from '@angular/common/http';
+import { ICustomer } from '../../shared/domains/ICustomer';
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
 
@@ -13,15 +14,14 @@ export class ConsumerHttpService {
 
   constructor() {}
 
-  /* TODO -> Hay que tiparlo cuando se defina el objeto */
-  getConsumers(): Observable<any> {
+  getConsumers(): Observable<ICustomer[]> {
     const url = `${this.url}/consumers`;
-    return this.http.get<any>(url);
+    return this.http.get<ICustomer[]>(url);
   }
 
   /* TODO -> Hay que tiparlo cuando se defina el objeto */
-  searchCounsumers(term: string): Observable<any> {
+  searchCounsumers(term: string): Observable<ICustomer[]> {
     const url = `${this.url}/consumers/search?searchTerm=${term}`;
-    return this.http.get<any>(url);
+    return this.http.get<ICustomer[]>(url);
   }
 }

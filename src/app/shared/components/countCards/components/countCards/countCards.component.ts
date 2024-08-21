@@ -24,9 +24,8 @@ export class CountCardsComponent implements OnInit {
   }
 
   getDashboardBroker() {
-    this.dashboardService.getBrokers().subscribe({
+    this.dashboardService.getConsumers().subscribe({
       next: (res: number) => {
-        console.log('BROKERS', res);
         this.brokers.set(res);
       },
     });
@@ -35,7 +34,6 @@ export class CountCardsComponent implements OnInit {
   getDashboardTopics() {
     this.dashboardService.getTopics().subscribe({
       next: (res: number) => {
-        console.log('TOPICS', res);
         this.topics.set(res);
       },
     });
@@ -44,7 +42,6 @@ export class CountCardsComponent implements OnInit {
   getDashboardPartitions() {
     this.dashboardService.getPartitions().subscribe({
       next: (res: number) => {
-        console.log('TOPICS', res);
         this.partitions.set(res);
       },
     });

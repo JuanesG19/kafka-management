@@ -8,8 +8,8 @@ import { Observable } from 'rxjs';
 export class DashboardService {
   constructor(private dashboardHttpService: DashboardHttpService) {}
 
-  getBrokers(): Observable<number> {
-    return this.dashboardHttpService.getBrokers();
+  getConsumers(): Observable<number> {
+    return this.dashboardHttpService.getConsumers();
   }
 
   getTopics(): Observable<number> {

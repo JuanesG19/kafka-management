@@ -1,4 +1,5 @@
 import { ConsumerHttpService } from '../infrastructure/consumer-http.service';
+import { ICustomer } from '../../shared/domains/ICustomer';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
@@ -8,13 +9,12 @@ import { Observable } from 'rxjs';
 export class ConsumerService {
   constructor(private consumerHttpService: ConsumerHttpService) {}
 
-  /* TODO -> Hay que tiparlo cuando se defina el objeto */
-  getConsumers(): Observable<any> {
+  getConsumers(): Observable<ICustomer[]> {
     return this.consumerHttpService.getConsumers();
   }
 
   /* TODO -> Hay que tiparlo cuando se defina el objeto */
-  searchCounsumers(term: string): Observable<any> {
+  searchCounsumers(term: string): Observable<ICustomer[]> {
     return this.consumerHttpService.searchCounsumers(term);
   }
 }

@@ -11,23 +11,23 @@ import { DashboardService } from '../../application/services/dashboard.service';
   imports: [RouterOutlet, RouterLink, RouterLinkActive],
 })
 export class DashboardComponent implements OnInit {
-  public brokers = signal<number>(0);
+  public consumers = signal<number>(0);
   public topics = signal<number>(0);
   public partitions = signal<number>(0);
 
   constructor(private dashboardService: DashboardService) {}
 
   ngOnInit() {
+    this.getDashboardConsumers();
     this.getDashboardTopics();
-    this.getDashboardBroker();
     this.getDashboardPartitions();
   }
 
-  getDashboardBroker() {
-    this.dashboardService.getBrokers().subscribe({
+  getDashboardConsumers() {
+    this.dashboardService.getConsumers().subscribe({
       next: (res: number) => {
-        console.log('BROKERS', res);
-        this.brokers.set(res);
+        console.log('Consumers', res);
+        this.consumers.set(res);
       },
     });
   }
@@ -35,7 +35,8 @@ export class DashboardComponent implements OnInit {
   getDashboardTopics() {
     this.dashboardService.getTopics().subscribe({
       next: (res: number) => {
-        console.log('TOPICS', res);
+        console.log('getTopics', res);
+
         this.topics.set(res);
       },
     });

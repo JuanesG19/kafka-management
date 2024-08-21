@@ -3,6 +3,7 @@ import { Component, OnInit, signal } from '@angular/core';
 import { ConsumerService } from '../../application/consumer.service';
 import { CountCardsComponent } from '../../../shared/components/countCards/components/countCards/countCards.component';
 import { CustomTableComponent } from '../../../shared/components/customTable/components/customTable/customTable.component';
+import { ICustomer } from '../../../shared/domains/ICustomer';
 import { Router } from '@angular/router';
 
 export interface Element {
@@ -18,7 +19,12 @@ export interface Element {
 })
 export class ConsumersComponent implements OnInit {
   public elementData = signal<Element[]>([]);
-  public columnDefinitions = [{ key: 'name', header: 'Nombre' }];
+  public columnDefinitions = [
+    { key: 'name', header: 'Nombre' },
+    { key: 'topicCount', header: 'topicCount' },
+    { key: 'memberCount', header: 'memberCount' },
+    { key: 'active', header: 'active' },
+  ];
 
   constructor(
     private consumerService: ConsumerService,
@@ -31,12 +37,9 @@ export class ConsumersComponent implements OnInit {
 
   getConsumers() {
     this.consumerService.getConsumers().subscribe({
-      next: (res: string[]) => {
-        const transformedData = res.map((item) => ({
-          name: item,
-        }));
-
-        this.elementData.set(transformedData);
+      next: (res: ICustomer[]) => {
+        this.elementData.set(res);
+        console.log('getConsumers', this.elementData());
       },
     });
   }
