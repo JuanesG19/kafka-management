@@ -18,17 +18,15 @@ export const routes: Routes = [
       { path: 'home', component: DashboardComponent },
       { path: 'consumers', component: ConsumersComponent },
       {
-        path: 'topics',
-        component: TopicsComponent,
-        pathMatch: 'full',
-        children: [{ path: ':consumer', component: TopicsComponent }],
+        path: 'topics', component: TopicsComponent,
       },
+      {path: 'topics/:consumer', component: TopicsComponent},
       { path: 'brokers', component: BrokersComponent },
       {
-        path: 'partitions',
-        component: PartitionsComponent,
-        pathMatch: 'full',
-        children: [{ path: ':topic', component: PartitionsComponent }],
+        path: 'partitions', component: PartitionsComponent,
+      },
+      {
+        path: 'partitions/:topic',component: PartitionsComponent,
       },
       { path: '**', redirectTo: 'home' },
     ],
