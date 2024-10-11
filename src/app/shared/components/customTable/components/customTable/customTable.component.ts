@@ -50,6 +50,8 @@ export class CustomTableComponent implements OnInit, AfterViewInit {
   @Input() columnName: string = '-';
   @Output() search = new EventEmitter<any>();
 
+  @Input() actions: any[] = [];
+
   displayedColumns: string[] = [];
   dataSource = new MatTableDataSource<any>([]);
 
@@ -57,15 +59,17 @@ export class CustomTableComponent implements OnInit, AfterViewInit {
   @ViewChild(MatSort) sort!: MatSort;
 
   ngOnInit() {
-    this.displayedColumns = [...this.columns.map((col) => col.key), 'actions'];
-    this.dataSource.data = this.data;
+    this.displayedColumns = [...this.columns.map((col) => col.key)];
+  if (this.actions && this.actions.length > 0) {
+    this.displayedColumns.push('actions');
+  }
+  this.dataSource.data = this.data;
 
+  console.log(this.dataSource.data)
     this.dataSource.filterPredicate = (data: any, filter: string) => {
       const dataStr = Object.values(data).join(' ').toLowerCase();
       return dataStr.includes(filter);
     };
-
-    console.log('DATASOURDETABLE:', this.dataSource.data);
   }
 
   ngAfterViewInit() {
@@ -80,5 +84,13 @@ export class CustomTableComponent implements OnInit, AfterViewInit {
 
   onSearch(element: any) {
     this.search.emit(element);
+  }
+
+  onSeeMessages(element: any) {
+    
+  }
+
+  onDelete(element: any) {
+    
   }
 }

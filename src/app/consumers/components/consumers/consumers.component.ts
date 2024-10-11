@@ -26,6 +26,15 @@ export class ConsumersComponent implements OnInit {
     { key: 'active', header: 'active' },
   ];
 
+  public actions = [
+    {
+      label: 'Search',
+      icon: 'search',
+      class: 'text-primary',
+      handler: (element: ICustomer) => this.handleSearch(element),
+    },
+  ];
+
   constructor(
     private consumerService: ConsumerService,
     private route: Router

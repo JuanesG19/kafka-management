@@ -2,5 +2,8 @@ export interface ITopic {
   topicName: string;
   totalPartitions: number;
   totalMessages: number;
-  consumers: string[];
+  consumers: {
+    threadCount: number;
+    consumerGroup: string;
+  }[];
 }

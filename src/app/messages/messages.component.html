@@ -1,0 +1,15 @@
+<h2 mat-dialog-title>Mensajes para el topic {{ data.topicName }}</h2>
+<mat-dialog-content>
+  @if(data.messages.length > 0){
+  <app-customTable
+    [data]="data.messages"
+    [columns]="columnsDefinitions"
+    [columnName]="'Mensajes'">
+  </app-customTable>}
+  @else {
+    <h2 mat-dialog-content align="center">No hay mensaje para mostrar</h2>
+  }
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button (click)="onClose()">Close</button>
+</mat-dialog-actions>
