@@ -5,7 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { PartitionsService } from '../../application/services/partition.service';
 import { GlobalLoadingComponent } from '../../../shared/components/globalLoading/components/globalLoading/globalLoading.component';
 import { IMessage } from '../../../shared/domains/IMessage';
-import { MessagesComponent } from '../../../messages/messages.component';
+import { MessagesComponent } from '../../../messages/components/messages/messages.component';
 import { MatDialog } from '@angular/material/dialog';
 
 export interface Element {

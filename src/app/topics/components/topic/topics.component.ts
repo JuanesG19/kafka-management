@@ -6,7 +6,7 @@ import { CustomTableComponent } from '../../../shared/components/customTable/com
 import { GlobalLoadingComponent } from '../../../shared/components/globalLoading/components/globalLoading/globalLoading.component';
 import { ITopic } from '../../../shared/domains/ITopic';
 import { TopicsService } from '../../application/services/topics.service';
-import { MessagesComponent } from '../../../messages/messages.component';
+import { MessagesComponent } from '../../../messages/components/messages/messages.component';
 import { IMessage } from '../../../shared/domains/IMessage';
 
 export interface Element {
