@@ -9,7 +9,7 @@ import { environment } from '../../../../environments/environment';
 })
 export class PartitionsHttpService {
   private http = inject(HttpClient);
-  private url: string = `${environment.url.domain}/platform/kafka`;
+  private url: string = `${environment.url.domain}/platform-kafka-admin/kafka`;
 
   /* TODO -> Hay que tiparlo cuando se defina el objeto */
   getPartitions(term : string):Observable<any>{

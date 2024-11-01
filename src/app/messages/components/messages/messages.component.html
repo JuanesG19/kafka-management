@@ -1,23 +1,26 @@
 <mat-dialog-content>
-  @if(data.messages.length > 0){
-  <app-customTable
-    [data]="data.messages"
-    [columns]="columnsDefinitions"
-    [columnName]="'Mensajes'"
-    [actions]="actions"
-  >
-  </app-customTable
-  >} @else {
-  <h2 mat-dialog-content align="center">No hay mensaje para mostrar</h2>
-  }
+  <div class="dialog-container">
+    @if(data.messages.length > 0) {
+      <app-customTable
+        [data]="data.messages"
+        [columns]="columnsDefinitions"
+        [columnName]="'Mensajes'"
+        [actions]="actions"
+      >
+      </app-customTable>
+    } @else {
+      <h2 mat-dialog-content align="center">No hay mensaje para mostrar</h2>
+    }
+  </div>
 </mat-dialog-content>
+
 <mat-dialog-actions align="end">
   <button mat-button (click)="onClose()">Close</button>
 </mat-dialog-actions>
 
 <ng-template #replyDialog let-data>
   <h2 mat-dialog-title>Reenvío del mensaje</h2>
-  <mat-card>
+  <div class="dialog-container">
     <mat-card-content>
       <form [formGroup]="formGroup">
         <mat-form-field appearance="outline">
@@ -33,19 +36,15 @@
           <input matInput formControlName="offset" />
         </mat-form-field>
         <mat-form-field appearance="outline">
-          <mat-label>Valor Nuevo</mat-label>
-          <input matInput formControlName="nuevoValor" />
-        </mat-form-field>
-        <mat-form-field appearance="outline">
-          <mat-label>Valor Viejo</mat-label>
+          <mat-label>Valor</mat-label>
           <input matInput formControlName="value" />
         </mat-form-field>
         <mat-form-field appearance="outline">
           <mat-label>Identificador</mat-label>
           <input matInput formControlName="key" />
         </mat-form-field>
-        <button mat-button>Send</button>
+        <button mat-raised-button color="primary" (click)="enviarDatos()">Confirmar</button>
       </form>
     </mat-card-content>
-  </mat-card>
+  </div>
 </ng-template>
