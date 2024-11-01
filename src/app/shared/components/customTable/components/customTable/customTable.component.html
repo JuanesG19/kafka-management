@@ -21,7 +21,7 @@
       <mat-header-cell *matHeaderCellDef mat-sort-header class="text-center">
         {{ column.header }}
       </mat-header-cell>
-      <mat-cell *matCellDef="let element" class="text-center">
+      <mat-cell *matCellDef="let element" [ngClass]="{'valor-cell': column.key === 'value'}" class="text-center">
         {{ element[column.key] }}
       </mat-cell>
     </ng-container>

@@ -1,5 +1,6 @@
 .table-container {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  width: 100%; /* O un valor fijo como 800px */
 }
 
 .custom-table {
@@ -9,17 +10,37 @@
 
 .mat-table {
   width: 100%;
-  table-layout: fixed;
+  table-layout: fixed; /* Asegúrate de que el layout sea fijo */
 }
 
 .mat-header-cell,
 .mat-cell {
   padding: 8px;
   text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .custom-paginator {
   background-color: #ffffff;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   overflow: hidden;
+}
+
+.custom-table .mat-cell.valor-cell,
+.custom-table .mat-header-cell.valor-cell {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 200px;
+  min-width: 0; /* Añade esta línea */
+}
+
+.valor-cell {
+  display: block;
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
