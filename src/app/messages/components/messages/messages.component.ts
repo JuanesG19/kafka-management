@@ -13,6 +13,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
 import {
   FormControl,
   FormGroup,
@@ -35,6 +36,7 @@ import { MessageService } from '../../application/services/messages.service';
     MatIconModule,
     MatGridListModule,
     MatCardModule,
+    MatButtonModule,
     ReactiveFormsModule,
   ],
 })
@@ -87,10 +89,10 @@ export class MessagesComponent {
   }
 
   openReplyDialog(element: IMessage) {
-    const dialogRef = this.dialog.open(this.replyDialog, {
+    this.dialog.open(this.replyDialog, {
       data: element,
       width: '1080px',
-      height: '500px',
+      height: '700px',
     });
 
     this.formGroup = new FormGroup({
@@ -100,12 +102,6 @@ export class MessagesComponent {
       value: new FormControl({ value: element.value, disabled: true }),
       key: new FormControl({ value: element.key, disabled: true }),
       nuevoValor: new FormControl(),
-    });
-
-    dialogRef.componentInstance.formGroup = this.formGroup;
-
-    dialogRef.afterClosed().subscribe((result) => {
-      console.log(`Dialog result: ${result}`);
     });
   }
 
@@ -122,14 +118,16 @@ export class MessagesComponent {
 
       console.log(datos);
 
-      this.messageService.retryMessage(datos).subscribe(
-        (response) => {
+      this.messageService.retryMessage(datos).subscribe({
+        next: (response: string) => {
           console.log('Mensaje reenviado con éxito:', response);
+          alert("Mensaje reenviado con éxito.");
           this.dialogRef.close();
+          location.reload();
         },
-        (error) => {
+        error: (error) => {
           console.error('Error al reenviar el mensaje:', error);
-        }
+        }}
       );
     } else {
       console.error('Formulario no válido');

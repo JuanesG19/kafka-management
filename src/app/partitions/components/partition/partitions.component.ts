@@ -136,7 +136,7 @@ export class PartitionsComponent implements OnInit {
   }
 
   handleSeeMessage(element: Element){
-    this.partitionService.getAllMensajesByTopicAndPartitions(element.topicName,element.nombre,0,10).subscribe({
+    this.partitionService.getAllMensajesByTopicAndPartitions(element.topicName,element.nombre,0,200).subscribe({
       next: (messages: IMessage[]) => {
         console.log(messages);
         this.dialog.open(MessagesComponent, {
