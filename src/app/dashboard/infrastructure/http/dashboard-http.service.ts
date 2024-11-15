@@ -28,5 +28,4 @@ export class DashboardHttpService {
     return this.http.get<number>(url);
   }
 
-  //getBrokers(): Observable<number> {}
 }
