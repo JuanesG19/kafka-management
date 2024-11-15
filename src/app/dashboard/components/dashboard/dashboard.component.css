@@ -57,6 +57,11 @@
   width: 100%;
 }
 
+.success-snackbar {
+  background-color: #4caf50;
+  color: white; 
+}
+
 /* Responsive adjustments */
 @media (max-width: 1024px) {
   .dashboard-container {

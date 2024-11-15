@@ -1,6 +1,6 @@
-import { Component, OnInit, signal } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
-
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { DashboardService } from '../../application/services/dashboard.service';
 
 @Component({
@@ -11,21 +11,26 @@ import { DashboardService } from '../../application/services/dashboard.service';
   imports: [RouterOutlet, RouterLink, RouterLinkActive],
 })
 export class DashboardComponent implements OnInit {
+  private readonly _snackBar = inject(MatSnackBar);
+
   public consumers = signal<number>(0);
   public topics = signal<number>(0);
   public partitions = signal<number>(0);
-
-  constructor(private dashboardService: DashboardService) {}
+  constructor(
+    private readonly dashboardService: DashboardService,
+  ) {}
 
   ngOnInit() {
-    this.getDashboardConsumers();
-    this.getDashboardTopics();
-    this.getDashboardPartitions();
+
+      this.getDashboardConsumers();
+      this.getDashboardTopics();
+      this.getDashboardPartitions();
+    
   }
 
   getDashboardConsumers() {
     this.dashboardService.getConsumers().subscribe({
-      next: (res: number) => {
+      next: (res: any) => {
         console.log('Consumers', res);
         this.consumers.set(res);
       },
@@ -34,9 +39,8 @@ export class DashboardComponent implements OnInit {
 
   getDashboardTopics() {
     this.dashboardService.getTopics().subscribe({
-      next: (res: number) => {
+      next: (res: any) => {
         console.log('getTopics', res);
-
         this.topics.set(res);
       },
     });
@@ -44,7 +48,7 @@ export class DashboardComponent implements OnInit {
 
   getDashboardPartitions() {
     this.dashboardService.getPartitions().subscribe({
-      next: (res: number) => {
+      next: (res: any) => {
         console.log('PARTITIONS', res);
         this.partitions.set(res);
       },

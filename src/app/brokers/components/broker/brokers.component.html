@@ -1,3 +1,29 @@
-<p>
-  brokers works!
-</p>
+<div class="dialog-container">
+  <h2 mat-dialog-title>Select a Broker</h2>
+  
+  <mat-dialog-content>
+    <form [formGroup]="dialogForm">
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Type the broker to connect</mat-label>
+        <input matInput formControlName="code" placeholder="Ej: ABC123">
+        @if(dialogForm.get('code')?.invalid && dialogForm.get('code')?.touched){<mat-error>
+          The Broker is Required
+        </mat-error>}
+      </mat-form-field>
+    
+      @if(errorMessage){<div class="error-message">
+        {{ errorMessage }}
+      </div>}
+    </form>
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end">
+    <button mat-raised-button 
+            color="primary" 
+            [disabled]="dialogForm.invalid"
+            (click)="onSubmit()">
+            @if(!isLoading){<span >Validate</span>}
+            @else if (isLoading) {<mat-spinner diameter="20"></mat-spinner>}
+    </button>
+  </mat-dialog-actions>
+</div>

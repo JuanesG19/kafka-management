@@ -33,15 +33,15 @@ export class PartitionsComponent implements OnInit {
   public loading = signal<boolean>(true);
 
   public columnDefinitions = [
-    { key: 'nombre', header: 'Nombre' },
-    { key: 'size', header: '# Mensajes' },
-    { key: 'topicName', header: 'Nombre del Topic' },
-    { key: 'lastOffset', header: 'Posición' },
-    { key: 'replicaNodes', header: 'Nodos Réplica' },
-    { key: 'leaderNode', header: 'BrokerId' },
-    { key: 'offlineReplicaNodes', header: 'Nodos Réplica Offline' },
-    { key: 'firstOffset', header: 'Inicio' },
-    { key: 'inSyncReplicaNodes', header: 'Nodos Replica Sincronizados' },
+    { key: 'nombre', header: 'Name' },
+    { key: 'size', header: '# Messages' },
+    { key: 'topicName', header: 'Topic Name' },
+    { key: 'lastOffset', header: 'Last Offset' },
+    { key: 'replicaNodes', header: 'Replica Nodes' },
+    { key: 'leaderNode', header: 'Leader Node' },
+    { key: 'offlineReplicaNodes', header: 'Offline Replica Nodes' },
+    { key: 'firstOffset', header: 'First Offset' },
+    { key: 'inSyncReplicaNodes', header: 'In Sync Replica Nodes' },
   ];
 
   public actions = [
@@ -52,7 +52,7 @@ export class PartitionsComponent implements OnInit {
       handler: (element: Element) => this.handleSearch(element),
     },
     {
-      label: 'Mensajes por Topic',
+      label: 'Messages By Topic',
       icon: 'mail',
       class: 'text-primary',
       handler: (element: Element) => this.handleSeeMessage(element),

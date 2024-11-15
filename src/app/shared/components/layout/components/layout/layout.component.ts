@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
-
+import { Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { DashboardComponent } from '../../../../../dashboard/components/dashboard/dashboard.component';
 import { FooterComponent } from '../../../home/components/footer/footer.component';
 import { MatDividerModule } from '@angular/material/divider';
@@ -28,7 +27,13 @@ import { NavbarComponent } from '../../../home/components/navbar/navbar.componen
   ],
 })
 export class LayoutComponent implements OnInit {
-  constructor() {}
+  constructor(private readonly router: Router) {}
 
   ngOnInit() {}
+
+  changeBroker(){
+    localStorage.removeItem("broker");
+    this.router.navigate(['/home']);
+    location.reload();  
+  }
 }
