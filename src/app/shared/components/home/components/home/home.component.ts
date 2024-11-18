@@ -1,7 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-
-import { DashboardComponent } from '../../../../dashboard/components/dashboard/dashboard.component';
-import { Router } from '@angular/router';
+import { Component} from '@angular/core';
+import {  DashboardComponent } from "../../../../../dashboard/components/dashboard/dashboard.component";
 
 @Component({
   selector: 'app-home',
@@ -10,8 +8,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./home.component.css'],
   imports: [DashboardComponent],
 })
-export class HomeComponent implements OnInit {
-  constructor(private router: Router) {}
+export class HomeComponent  {
+  constructor() {}
 
-  ngOnInit() {}
 }

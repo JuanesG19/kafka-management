@@ -1,7 +1,6 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import {
   FormBuilder,
-  FormGroup,
   Validators,
   ReactiveFormsModule,
 } from '@angular/forms';
@@ -60,7 +59,8 @@ export class BrokersComponent {
           localStorage.setItem('broker', code);
           this.isLoading.set(false);
         },
-        error: () => {
+        error: (response) => {
+          console.log(response)
           this.isLoading.set(false);
           this.errorMessage.set("Error, try again");
         }

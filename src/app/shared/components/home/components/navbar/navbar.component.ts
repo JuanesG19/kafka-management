@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 
 import { FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -24,12 +24,10 @@ import { Router } from '@angular/router';
     FormsModule,
   ],
 })
-export class NavbarComponent implements OnInit {
-  constructor(private router: Router) {}
+export class NavbarComponent{
+  constructor(private readonly router: Router) {}
 
   @Output() toggleDrawer = new EventEmitter<void>();
-
-  ngOnInit() {}
 
   onLogout() {
     this.router.navigate(['/login']);

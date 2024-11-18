@@ -3,7 +3,6 @@ import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
-import { IBroker } from '../../shared/domains/IBroker';
 
 @Injectable({
   providedIn: 'root',
@@ -14,9 +13,9 @@ export class BrokersHttpService {
 
   constructor() {}
 
-  selectBroker(term: string): Observable<IBroker> {
+  selectBroker(term: string): Observable<string> {
     const url = `${this.url}/connect/${term}`;
-    return this.http.get<IBroker>(url);
+    return this.http.get<string>(url, { responseType: 'text' as 'json' });
   }
 
 }

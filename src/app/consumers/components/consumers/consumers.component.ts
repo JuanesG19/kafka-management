@@ -36,8 +36,8 @@ export class ConsumersComponent implements OnInit {
   ];
 
   constructor(
-    private consumerService: ConsumerService,
-    private route: Router
+    private readonly consumerService: ConsumerService,
+    private readonly route: Router
   ) {}
 
   ngOnInit() {

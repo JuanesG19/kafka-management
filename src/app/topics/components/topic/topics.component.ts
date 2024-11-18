@@ -48,80 +48,85 @@ export class TopicsComponent implements OnInit {
   ];
 
   constructor(
-    private route: ActivatedRoute,
-    private topicsService: TopicsService,
-    private router: Router,
-    private dialog: MatDialog 
+    private readonly route: ActivatedRoute,
+    private readonly topicsService: TopicsService,
+    private readonly router: Router,
+    private readonly dialog: MatDialog 
   ) {}
 
   ngOnInit() {
     this.loading.set(true);
+    this.route.paramMap.subscribe((params) => this.handleRouteParams(params));
+  }
 
-    this.route.paramMap.subscribe((params) => {
-      const consumer = params.get('consumer') ?? '';
-      console.log('CONSUMER PARAM', consumer);
+  private handleRouteParams(params: any) {
+    const consumer = params.get('consumer') ?? '';
+    console.log('CONSUMER PARAM', consumer);
 
-      if (consumer == '') {
-        this.idConsumer.set('General');
-        this.generalSearch();
-      } else {
-        this.idConsumer.set(consumer);
-        this.topicsService.getTopicsByTerm(consumer).subscribe({
-          next: (res: ITopic[]) => {
-            const transformedData = res.map(topic => ({
-              ...topic,
-              consumerGroup: topic.consumers.length > 0 
-                ? topic.consumers.map(consumer => consumer.consumerGroup).join(', ')
-                : ''
-            }));
-            this.elementData.set(transformedData);
-          },
-          complete: () => this.loading.set(false),
-          error: () => this.loading.set(false),
-        });
-      }
-      console.log('TOPICS BY BD', this.elementData());
+    if (consumer === '') {
+      this.idConsumer.set('General');
+      this.generalSearch();
+    } else {
+      this.idConsumer.set(consumer);
+      this.fetchTopicsByConsumer(consumer);
+    }
+  }
+
+  private fetchTopicsByConsumer(consumer: string) {
+    this.topicsService.getTopicsByTerm(consumer).subscribe({
+      next: (res: ITopic[]) => this.transformAndSetData(res),
+      complete: () => this.loading.set(false),
+      error: () => this.loading.set(false),
     });
   }
 
-generalSearch() {
-  this.topicsService.getTopics().subscribe({
-    next: (res: ITopic[]) => {
-      const transformedData = res.map(topic => ({
-        ...topic,
-        consumerGroup: topic.consumers.length > 0 
-          ? topic.consumers.map(consumer => consumer.consumerGroup).join(', ')
-          : ''
-      }));
-      this.elementData.set(transformedData);
-    },
-    complete: () => this.loading.set(false),
-    error: () => this.loading.set(false),
-  });
-}
+  private transformAndSetData(res: ITopic[]) {
+    const transformedData = res.map(topic => ({
+      ...topic,
+      consumerGroup: this.getConsumerGroupString(topic.consumers),
+    }));
+    this.elementData.set(transformedData);
+    console.log('TOPICS BY BD', this.elementData());
+  }
+
+  private getConsumerGroupString(consumers: any[]) {
+    return consumers.length > 0 
+      ? consumers.map(consumer => consumer.consumerGroup).join(', ')
+      : '';
+  }
+
+  generalSearch() {
+    this.topicsService.getTopics().subscribe({
+      next: (res: ITopic[]) => this.transformAndSetData(res),
+      complete: () => this.loading.set(false),
+      error: () => this.loading.set(false),
+    });
+  }
 
   handleSearch(element: Element) {
     this.router.navigate(['/partitions', element.topicName]);
     console.log('Selected element:', element);
   }
 
-  handleSeeMessage(element: ITopic){
-    this.topicsService.getMessagesByTopic(element.topicName,0,10).subscribe({
-      next: (messages: IMessage[]) => {
-        this.dialog.open(MessagesComponent, {
-          width: '90%',
-          maxWidth: '1200px',
-          data: {
-            topicName: element.topicName,
-            messages: messages
-          }
-        });
-        console.log(messages);
-      },
+  handleSeeMessage(element: ITopic) {
+    this.topicsService.getMessagesByTopic(element.topicName, 0, 10).subscribe({
+      next: (messages: IMessage[]) => this.openMessagesDialog(element.topicName, messages),
       error: (error) => {
         console.error('Error fetching messages:', error);
       }
     });
+  }
+
+  private openMessagesDialog(topicName: string, messages: IMessage[]) {
+    this.dialog.open(MessagesComponent, {
+      width: '90%',
+      maxWidth: '1200px',
+      data: {
+        topicName: topicName,
+        messages: messages
+      }
+    });
+    console.log(messages);
   }
   
 }

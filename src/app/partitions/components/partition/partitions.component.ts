@@ -1,7 +1,7 @@
 import { Component, OnInit, signal } from '@angular/core';
 import { CountCardsComponent } from '../../../shared/components/countCards/components/countCards/countCards.component';
 import { CustomTableComponent } from '../../../shared/components/customTable/components/customTable/customTable.component';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute} from '@angular/router';
 import { PartitionsService } from '../../application/services/partition.service';
 import { GlobalLoadingComponent } from '../../../shared/components/globalLoading/components/globalLoading/globalLoading.component';
 import { IMessage } from '../../../shared/domains/IMessage';
@@ -60,10 +60,9 @@ export class PartitionsComponent implements OnInit {
   ];
 
   constructor(
-    private route: ActivatedRoute,
-    private partitionService: PartitionsService,
-    private router: Router,
-    private dialog: MatDialog 
+    private readonly route: ActivatedRoute,
+    private readonly partitionService: PartitionsService,
+    private readonly dialog: MatDialog 
   ) {}
 
   ngOnInit() {

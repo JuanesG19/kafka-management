@@ -7,6 +7,7 @@
       <mat-icon
         class="drawer-close cursor-pointer text-2xl"
         (click)="drawer.close()"
+        (keydown.enter)="drawer.close()"
         >close</mat-icon
       >
     </mat-toolbar>
@@ -16,6 +17,7 @@
         class="drawer-link"
         [routerLink]="item.route"
         (click)="item.action && item.action()"
+        (keydown.enter)="item.action && item.action()"
       >
         <mat-icon matListItemIcon>{{ item.icon }}</mat-icon>
         <div matListItemTitle>

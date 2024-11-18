@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component} from '@angular/core';
 import { Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { DashboardComponent } from '../../../../../dashboard/components/dashboard/dashboard.component';
 import { FooterComponent } from '../../../home/components/footer/footer.component';
@@ -28,17 +28,14 @@ interface MenuItem {
     MatSidenavModule,
     MatToolbarModule,
     NavbarComponent,
-    FooterComponent,
     MatIconModule,
     MatDividerModule,
     RouterOutlet,
     RouterLink,
-    RouterLinkActive,
-    DashboardComponent,
     MatListModule,
   ],
 })
-export class LayoutComponent implements OnInit {
+export class LayoutComponent  {
   menuItems: MenuItem[] = [
     {
       icon: 'home',
@@ -69,8 +66,6 @@ export class LayoutComponent implements OnInit {
   ];
 
   constructor(private readonly router: Router) {}
-
-  ngOnInit() {}
 
   changeBroker(){
     localStorage.removeItem("broker");

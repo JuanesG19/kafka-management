@@ -18,7 +18,6 @@ import {
   FormControl,
   FormGroup,
   ReactiveFormsModule,
-  Validators,
 } from '@angular/forms';
 import { MessageService } from '../../application/services/messages.service';
 
@@ -66,8 +65,8 @@ export class MessagesComponent {
     public dialogRef: MatDialogRef<MessagesComponent>,
     @Inject(MAT_DIALOG_DATA)
     public data: { messages: IMessage[]; topicName: string },
-    private dialog: MatDialog,
-    private messageService: MessageService
+    private readonly dialog: MatDialog,
+    private readonly messageService: MessageService
   ) {}
 
   onClose(): void {

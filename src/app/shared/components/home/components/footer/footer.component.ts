@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component} from '@angular/core';
 
 import { MatToolbarModule } from '@angular/material/toolbar';
 
@@ -9,8 +9,6 @@ import { MatToolbarModule } from '@angular/material/toolbar';
   styleUrls: ['./footer.component.css'],
   imports: [MatToolbarModule],
 })
-export class FooterComponent implements OnInit {
+export class FooterComponent  {
   constructor() {}
-
-  ngOnInit() {}
 }

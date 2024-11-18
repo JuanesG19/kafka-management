@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class DashboardService {
-  constructor(private dashboardHttpService: DashboardHttpService) {}
+  constructor(private readonly dashboardHttpService: DashboardHttpService) {}
 
   getConsumers(): Observable<number> {
     return this.dashboardHttpService.getConsumers();

@@ -4,7 +4,6 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import {
   FormGroup,
-  FormControl,
   Validators,
   ReactiveFormsModule,
   FormBuilder,
@@ -27,7 +26,7 @@ export class LoginComponent {
   loginForm: FormGroup;
   errorMessage: string | null = null;
 
-  constructor(private fb: FormBuilder, private router: Router) {
+  constructor(private readonly fb: FormBuilder, private readonly router: Router) {
     this.loginForm = this.fb.group({
       username: ['', Validators.required],
       password: ['', Validators.required],

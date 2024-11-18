@@ -6,7 +6,7 @@ import { PartitionsHttpService } from '../../infrastructure/http/partition-http.
   providedIn: 'root',
 })
 export class PartitionsService {
-  constructor(private partitionHttpService: PartitionsHttpService) {}
+  constructor(private readonly partitionHttpService: PartitionsHttpService) {}
 
     /* TODO -> Hay que tiparlo cuando se defina el objeto */
     getPartitions(term: string): Observable<any> {

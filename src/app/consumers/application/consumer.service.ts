@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class ConsumerService {
-  constructor(private consumerHttpService: ConsumerHttpService) {}
+  constructor(private readonly consumerHttpService: ConsumerHttpService) {}
 
   getConsumers(): Observable<ICustomer[]> {
     return this.consumerHttpService.getConsumers();
