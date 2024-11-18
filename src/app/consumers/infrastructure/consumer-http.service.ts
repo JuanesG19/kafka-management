@@ -9,8 +9,8 @@ import { environment } from '../../../environments/environment';
   providedIn: 'root',
 })
 export class ConsumerHttpService {
-  private http = inject(HttpClient);
-  private url: string = `${environment.url.domain}/platform-kafka-admin/kafka`;
+  private readonly http = inject(HttpClient);
+  private readonly url: string = `${environment.url.domain}/platform-kafka-admin/kafka`;
 
   constructor() {}
 
@@ -18,8 +18,7 @@ export class ConsumerHttpService {
     const url = `${this.url}/consumers`;
     return this.http.get<ICustomer[]>(url);
   }
-
-  /* TODO -> Hay que tiparlo cuando se defina el objeto */
+  
   searchCounsumers(term: string): Observable<ICustomer[]> {
     const url = `${this.url}/consumers/search?searchTerm=${term}`;
     return this.http.get<ICustomer[]>(url);

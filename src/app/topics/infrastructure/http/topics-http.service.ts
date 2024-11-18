@@ -10,8 +10,8 @@ import { IMessage } from '../../../shared/domains/IMessage';
   providedIn: 'root',
 })
 export class TopicsHttpService {
-  private http = inject(HttpClient);
-  private url: string = `${environment.url.domain}/platform-kafka-admin/kafka`;
+  private readonly http = inject(HttpClient);
+  private readonly url: string = `${environment.url.domain}/platform-kafka-admin/kafka`;
 
   getTopics(): Observable<ITopic[]> {
     const url = `${this.url}/topics`;

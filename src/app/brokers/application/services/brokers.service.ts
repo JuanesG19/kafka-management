@@ -1,17 +1,20 @@
-import { Injectable, inject } from '@angular/core';
-import { interval, Observable, Subscription } from 'rxjs';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { BrokersHttpService } from '../../infrastructure/brokers-http.service';
 import { MatDialog } from '@angular/material/dialog';
 import { BrokersComponent } from '../../components/broker/brokers.component';
+import { IBroker } from '../../../shared/domains/IBroker';
 
 @Injectable({
   providedIn: 'root',
 })
 export class BrokersService {
+  constructor(
+    private readonly brokersHttpService: BrokersHttpService,
+    private readonly dialog: MatDialog
+  ) {}
 
-  constructor(private readonly brokersHttpService: BrokersHttpService,private readonly dialog: MatDialog) {}
-
-  selectBroker(term: string): Observable<string> {
+  selectBroker(term: string): Observable<IBroker> {
     return this.brokersHttpService.selectBroker(term);
   }
 
@@ -30,13 +33,12 @@ export class BrokersService {
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result?.success) {
-        // Handle success
+        console.log(result)
       } else {
         setTimeout(() => {
           this.openBrokerDialog();
         }, 100);
       }
     });
-
   }
 }

@@ -11,8 +11,8 @@
         </mat-error>}
       </mat-form-field>
     
-      @if(errorMessage){<div class="error-message">
-        {{ errorMessage }}
+      @if(errorMessage()){<div class="error-message">
+        {{ errorMessage() }}
       </div>}
     </form>
   </mat-dialog-content>
@@ -22,8 +22,8 @@
             color="primary" 
             [disabled]="dialogForm.invalid"
             (click)="onSubmit()">
-            @if(!isLoading){<span >Validate</span>}
-            @else if (isLoading) {<mat-spinner diameter="20"></mat-spinner>}
+            @if(!isLoading()){<span >Validate</span>}
+            @else if (isLoading()) {<mat-spinner diameter="20"></mat-spinner>}
     </button>
   </mat-dialog-actions>
 </div>

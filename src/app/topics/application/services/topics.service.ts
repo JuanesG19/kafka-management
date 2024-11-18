@@ -8,7 +8,7 @@ import { IMessage } from '../../../shared/domains/IMessage';
   providedIn: 'root',
 })
 export class TopicsService {
-  constructor(private topicsHttpService: TopicsHttpService) {}
+  constructor(private readonly topicsHttpService: TopicsHttpService) {}
 
   getTopics(): Observable<ITopic[]> {
     return this.topicsHttpService.getTopics();
@@ -18,7 +18,11 @@ export class TopicsService {
     return this.topicsHttpService.getTopicsByTerm(term);
   }
 
-  getMessagesByTopic(topic:string, offset:number, limit: number) : Observable<IMessage[]>{
-    return this.topicsHttpService.getMessagesByTopic(topic,offset,limit);
+  getMessagesByTopic(
+    topic: string,
+    offset: number,
+    limit: number
+  ): Observable<IMessage[]> {
+    return this.topicsHttpService.getMessagesByTopic(topic, offset, limit);
   }
 }

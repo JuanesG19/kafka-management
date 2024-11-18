@@ -11,13 +11,18 @@
       >
     </mat-toolbar>
     <mat-divider class="drawer-divider bg-gray-700"></mat-divider>
-    <div class="drawer-content flex flex-col flex-1 p-4">
-      <a routerLink="/home" class="drawer-link">Home</a>
-      <a routerLink="/consumers" class="drawer-link">Consumers</a>
-      <a routerLink="/topics" class="drawer-link">Topics</a>
-      <a routerLink="/partitions" class="drawer-link">Partitions</a>
-      <a routerLink="/home" class="drawer-link" (click)="changeBroker()">Change Broker</a>
-    </div>
+    <mat-list class="drawer-content flex flex-col flex-1 p-4 pa-0">
+      @for(item of menuItems; track item){<mat-list-item
+        class="drawer-link"
+        [routerLink]="item.route"
+        (click)="item.action && item.action()"
+      >
+        <mat-icon matListItemIcon>{{ item.icon }}</mat-icon>
+        <div matListItemTitle>
+          {{ item.label }}
+        </div> </mat-list-item
+      >}
+    </mat-list>
   </mat-drawer>
 
   <mat-drawer-content>

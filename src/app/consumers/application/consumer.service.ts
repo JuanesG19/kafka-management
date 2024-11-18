@@ -13,7 +13,6 @@ export class ConsumerService {
     return this.consumerHttpService.getConsumers();
   }
 
-  /* TODO -> Hay que tiparlo cuando se defina el objeto */
   searchCounsumers(term: string): Observable<ICustomer[]> {
     return this.consumerHttpService.searchCounsumers(term);
   }

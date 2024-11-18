@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -12,7 +12,6 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
 import { BrokersService } from '../../application/services/brokers.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-brokers',
@@ -30,45 +29,41 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   ],
 })
 export class BrokersComponent {
-  
-  dialogForm: FormGroup;
-  errorMessage: string = '';
-  isLoading: boolean = false;
+  dialogForm = this.fb.nonNullable.group({
+    code: ['', [Validators.required]]
+  });
+
+  isLoading = signal(false);
+  errorMessage = signal('');
 
   constructor(
     private readonly dialogRef: MatDialogRef<BrokersComponent>,
     private readonly fb: FormBuilder,
     private readonly brokerService: BrokersService,
-    private readonly _snackBar: MatSnackBar
   ) {
     this.dialogRef.disableClose = true;
-    this.dialogForm = this.fb.group({
-      code: ['', Validators.required],
-    });
   }
 
   onSubmit(): void {
-    if (this.dialogForm.valid && !this.isLoading) {
-      this.isLoading = true;
-      this.errorMessage = '';
-      const code = this.dialogForm.value.code;
+    if (this.dialogForm.valid) {
+      this.isLoading.set(true);
+      this.errorMessage.set('');
+      const code = this.dialogForm.getRawValue().code;
 
       this.brokerService.selectBroker(code).subscribe({
         next: (response) => {
           this.dialogRef.close({
             success: true,
-            code: code,
-            data: response,
+            code,
+            data: response
           });
           localStorage.setItem('broker', code);
-          location.reload();
-          this.isLoading = false;
+          this.isLoading.set(false);
         },
-        error: (error) => {
-          this.isLoading = false;
-          this._snackBar.open('Error selecting broker, try again', 'Close', { duration: 3000 }); // Snackbar no se cierra automáticamente
-          console.log('Error', error);
-        },
+        error: () => {
+          this.isLoading.set(false);
+          this.errorMessage.set("Error, try again");
+        }
       });
     }
   }
