@@ -1,7 +1,5 @@
 import { Component} from '@angular/core';
-import { Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
-import { DashboardComponent } from '../../../../../dashboard/components/dashboard/dashboard.component';
-import { FooterComponent } from '../../../home/components/footer/footer.component';
+import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSidenavModule } from '@angular/material/sidenav';

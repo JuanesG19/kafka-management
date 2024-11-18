@@ -3,7 +3,6 @@ import { Observable } from 'rxjs';
 import { BrokersHttpService } from '../../infrastructure/brokers-http.service';
 import { MatDialog } from '@angular/material/dialog';
 import { BrokersComponent } from '../../components/broker/brokers.component';
-import { IBroker } from '../../../shared/domains/IBroker';
 
 @Injectable({
   providedIn: 'root',
