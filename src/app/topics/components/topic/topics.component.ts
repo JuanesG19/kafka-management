@@ -8,6 +8,7 @@ import { ITopic } from '../../../shared/domains/ITopic';
 import { TopicsService } from '../../application/services/topics.service';
 import { MessagesComponent } from '../../../messages/components/messages/messages.component';
 import { IMessage } from '../../../shared/domains/IMessage';
+import { PageEvent } from '@angular/material/paginator';
 
 export interface Element {
   topicName: string;
@@ -21,6 +22,16 @@ export interface Element {
   imports: [CountCardsComponent, CustomTableComponent, GlobalLoadingComponent],
 })
 export class TopicsComponent implements OnInit {
+  currentPagination: { pageIndex: number; pageSize: number } = {
+    pageIndex: 0,
+    pageSize: 10,
+  };
+
+  onPageChanged(event: PageEvent) {
+    this.currentPagination.pageIndex = event.pageIndex;
+    this.currentPagination.pageSize = event.pageSize;
+  }
+
   public idConsumer = signal<string>('');
   public elementData = signal<ITopic[]>([]);
   public loading = signal<boolean>(true);
@@ -51,7 +62,7 @@ export class TopicsComponent implements OnInit {
     private readonly route: ActivatedRoute,
     private readonly topicsService: TopicsService,
     private readonly router: Router,
-    private readonly dialog: MatDialog 
+    private readonly dialog: MatDialog
   ) {}
 
   ngOnInit() {
@@ -81,7 +92,7 @@ export class TopicsComponent implements OnInit {
   }
 
   private transformAndSetData(res: ITopic[]) {
-    const transformedData = res.map(topic => ({
+    const transformedData = res.map((topic) => ({
       ...topic,
       consumerGroup: this.getConsumerGroupString(topic.consumers),
     }));
@@ -90,8 +101,8 @@ export class TopicsComponent implements OnInit {
   }
 
   private getConsumerGroupString(consumers: any[]) {
-    return consumers.length > 0 
-      ? consumers.map(consumer => consumer.consumerGroup).join(', ')
+    return consumers.length > 0
+      ? consumers.map((consumer) => consumer.consumerGroup).join(', ')
       : '';
   }
 
@@ -110,10 +121,11 @@ export class TopicsComponent implements OnInit {
 
   handleSeeMessage(element: ITopic) {
     this.topicsService.getMessagesByTopic(element.topicName, 0, 10).subscribe({
-      next: (messages: IMessage[]) => this.openMessagesDialog(element.topicName, messages),
+      next: (messages: IMessage[]) =>
+        this.openMessagesDialog(element.topicName, messages),
       error: (error) => {
         console.error('Error fetching messages:', error);
-      }
+      },
     });
   }
 
@@ -123,10 +135,9 @@ export class TopicsComponent implements OnInit {
       maxWidth: '1200px',
       data: {
         topicName: topicName,
-        messages: messages
-      }
+        messages: messages,
+      },
     });
     console.log(messages);
   }
-  
 }

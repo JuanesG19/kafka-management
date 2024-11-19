@@ -7,7 +7,7 @@ import {
   Output,
   ViewChild,
 } from '@angular/core';
-import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+import { MatPaginator, MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 
@@ -49,6 +49,17 @@ export class CustomTableComponent implements OnInit, AfterViewInit {
   @Input() columns: Column[] = [];
   @Input() columnName: string = '-';
   @Output() search = new EventEmitter<any>();
+  @Input() paginationOptions: { pageSize: number; pageSizeOptions: number[] } = {
+    pageSize: 10,
+    pageSizeOptions: [5, 10, 25],
+  };
+
+  @Output() pageChange = new EventEmitter<PageEvent>();
+
+  onPageChange(event: PageEvent) {
+    console.log('Página cambiada', event); // Debug para asegurarte de que el evento se dispara
+    this.pageChange.emit(event);
+  }
 
   @Input() actions: any[] = [];
 

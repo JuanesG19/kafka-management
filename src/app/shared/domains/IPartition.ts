@@ -1,5 +1,5 @@
-export interface Partition {
-  nombre: string;
+export interface IPartition {
+  partitionName: string;
   size: number;
   topicName: string;
   lastOffset: number;
@@ -9,9 +9,8 @@ export interface Partition {
   firstOffset: number;
   inSyncReplicaNodes: number;
 }
-
 export interface Topic {
-  [partitionKey: string]: Partition;
+  [partitionKey: string]: IPartition;
 }
 
 export interface KafkaTopics {

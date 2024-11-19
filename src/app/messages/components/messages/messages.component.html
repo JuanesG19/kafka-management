@@ -6,6 +6,8 @@
         [columns]="columnsDefinitions"
         [columnName]="'Mensajes'"
         [actions]="actions"
+        [paginationOptions]="{ pageSize: 10, pageSizeOptions: [10, 20, 50] }"
+        (pageChange)="onPageChanged($event)"
       >
       </app-customTable>
     } @else {

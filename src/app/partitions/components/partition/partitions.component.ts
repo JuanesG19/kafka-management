@@ -1,24 +1,14 @@
 import { Component, OnInit, signal } from '@angular/core';
 import { CountCardsComponent } from '../../../shared/components/countCards/components/countCards/countCards.component';
 import { CustomTableComponent } from '../../../shared/components/customTable/components/customTable/customTable.component';
-import { ActivatedRoute} from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { PartitionsService } from '../../application/services/partition.service';
 import { GlobalLoadingComponent } from '../../../shared/components/globalLoading/components/globalLoading/globalLoading.component';
 import { IMessage } from '../../../shared/domains/IMessage';
 import { MessagesComponent } from '../../../messages/components/messages/messages.component';
 import { MatDialog } from '@angular/material/dialog';
-
-export interface Element {
-  nombre: string;
-  size: number;
-  topicName: string;
-  lastOffset: number;
-  replicaNodes: number;
-  leaderNode: string;
-  offlineReplicaNodes: number;
-  firstOffset: number;
-  inSyncReplicaNodes: number;
-}
+import { IPartition } from '../../../shared/domains/IPartition';
+import { PageEvent } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-partitions',
@@ -29,11 +19,20 @@ export interface Element {
 })
 export class PartitionsComponent implements OnInit {
   public idTopic = signal<string>('');
-  public elementData = signal<Element[]>([]);
+  public elementData = signal<IPartition[]>([]);
   public loading = signal<boolean>(true);
+  lastSelectedPartition: IPartition | null = null;
+
+
+  currentPagination: { pageIndex: number; pageSize: number } = { pageIndex: 0, pageSize: 10 };
+
+onPageChanged(event: PageEvent) {
+  this.currentPagination.pageIndex = event.pageIndex;
+  this.currentPagination.pageSize = event.pageSize;
+}
 
   public columnDefinitions = [
-    { key: 'nombre', header: 'Name' },
+    { key: 'partitionName', header: 'Name' },
     { key: 'size', header: '# Messages' },
     { key: 'topicName', header: 'Topic Name' },
     { key: 'lastOffset', header: 'Last Offset' },
@@ -49,13 +48,13 @@ export class PartitionsComponent implements OnInit {
       label: 'Search',
       icon: 'search',
       class: 'text-primary',
-      handler: (element: Element) => this.handleSearch(element),
+      handler: (element: IPartition) => this.handleSearch(element),
     },
     {
       label: 'Messages By Topic',
       icon: 'mail',
       class: 'text-primary',
-      handler: (element: Element) => this.handleSeeMessage(element),
+      handler: (element: IPartition) => this.handleSeeMessage(element),
     },
   ];
 
@@ -83,22 +82,8 @@ export class PartitionsComponent implements OnInit {
 
   generalSearch() {
     this.partitionService.getAllPartitions().subscribe({
-      next: (res: { [key: string]: any }) => {
-        const transformedData = Object.keys(res).map((key) => {
-          const partition = res[key];
-          return {
-            nombre: key,
-            size: partition.size,
-            topicName: partition.topicName,
-            lastOffset: partition.lastOffset,
-            replicaNodes: partition.replicaNodes.length,
-            leaderNode: partition.leaderNode,
-            offlineReplicaNodes: partition.offlineReplicaNodes.length,
-            firstOffset: partition.firstOffset,
-            inSyncReplicaNodes: partition.inSyncReplicaNodes,
-          };
-        });
-        this.elementData.set(transformedData);
+      next: (res: IPartition[]) => {
+        this.elementData.set(res);
       },
       complete: () => this.loading.set(false),
       error: () => this.loading.set(false),
@@ -107,50 +92,52 @@ export class PartitionsComponent implements OnInit {
 
   searchPartitionByTopic(topic: string) {
     this.partitionService.getPartitions(topic).subscribe({
-      next: (res: { [key: string]: any }) => {
-        console.log(res);
-        const transformedData = Object.keys(res).map((key) => {
-          const partition = res[key];
-          return {
-            nombre: key,
-            size: partition.size,
-            topicName: partition.topicName,
-            lastOffset: partition.lastOffset,
-            replicaNodes: partition.replicaNodes.length,
-            leaderNode: partition.leaderNode,
-            offlineReplicaNodes: partition.offlineReplicaNodes.length,
-            firstOffset: partition.firstOffset,
-            inSyncReplicaNodes: partition.inSyncReplicaNodes,
-          };
-        });
-        this.elementData.set(transformedData);
+      next: (res: IPartition[]) => {
+        this.elementData.set(res);
       },
       complete: () => this.loading.set(false),
       error: () => this.loading.set(false),
     });
   }
 
-  handleSearch(element: Element) {
+  handleSearch(element: IPartition) {
     console.log('Selected element:', element);
   }
 
-  handleSeeMessage(element: Element){
-    this.partitionService.getAllMensajesByTopicAndPartitions(element.topicName,element.nombre,0,200).subscribe({
+  handleSeeMessage(element: IPartition) {
+    console.log("pagina cambiada 2")
+    this.lastSelectedPartition = element; 
+    this.fetchMessages();
+  }
+
+  fetchMessages() {
+    console.log("pagina cambiada 3")
+  if (!this.lastSelectedPartition) return; 
+
+  const partitionSplit = this.lastSelectedPartition.partitionName.split("-");
+  const { pageIndex, pageSize } = this.currentPagination;
+
+  this.partitionService
+    .getAllMensajesByTopicAndPartitions(
+      this.lastSelectedPartition.topicName,
+      partitionSplit[1],
+      pageIndex,
+      pageSize
+    )
+    .subscribe({
       next: (messages: IMessage[]) => {
-        console.log(messages);
         this.dialog.open(MessagesComponent, {
           width: '90%',
           maxWidth: '1200px',
           data: {
-            topicName: element.topicName,
-            messages: messages
-          }
+            topicName: this.lastSelectedPartition?.topicName,
+            messages: messages,
+          },
         });
-        console.log(messages);
       },
       error: (error) => {
         console.error('Error fetching messages:', error);
-      }
+      },
     });
-  }
+}
 }

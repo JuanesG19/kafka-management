@@ -14,12 +14,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
-import {
-  FormControl,
-  FormGroup,
-  ReactiveFormsModule,
-} from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { MessageService } from '../../application/services/messages.service';
+import { PageEvent } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-messages',
@@ -40,6 +37,16 @@ import { MessageService } from '../../application/services/messages.service';
   ],
 })
 export class MessagesComponent {
+  currentPagination: { pageIndex: number; pageSize: number } = {
+    pageIndex: 0,
+    pageSize: 10,
+  };
+
+  onPageChanged(event: PageEvent) {
+    this.currentPagination.pageIndex = event.pageIndex;
+    this.currentPagination.pageSize = event.pageSize;
+  }
+
   columnsDefinitions = [
     { key: 'timestamp', header: 'Timestamp' },
     { key: 'partition', header: 'Partición' },
@@ -107,11 +114,11 @@ export class MessagesComponent {
   enviarDatos() {
     if (this.formGroup.valid) {
       const datos = {
-        topic: "topic_test",
+        topic: 'topic_test',
         partition: this.formGroup.get('partition')?.value,
         previousMessage: this.formGroup.get('value')?.value,
         idMessagePrevious: this.formGroup.get('key')?.value,
-        userDomain: "userDomain",
+        userDomain: 'userDomain',
         newMessage: this.formGroup.get('value')?.value,
       };
 
@@ -120,14 +127,14 @@ export class MessagesComponent {
       this.messageService.retryMessage(datos).subscribe({
         next: (response: string) => {
           console.log('Mensaje reenviado con éxito:', response);
-          alert("Mensaje reenviado con éxito.");
+          alert('Mensaje reenviado con éxito.');
           this.dialogRef.close();
           location.reload();
         },
         error: (error) => {
           console.error('Error al reenviar el mensaje:', error);
-        }}
-      );
+        },
+      });
     } else {
       console.error('Formulario no válido');
     }

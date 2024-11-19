@@ -6,11 +6,13 @@
     </div>
     <div class="mt-5">
       <app-customTable
-        [data]="elementData()"
-        [columns]="columnDefinitions"
-        [columnName]="'Partitions'"
-        [actions]="actions"
-      ></app-customTable>
+      [data]="elementData()"
+      [columns]="columnDefinitions"
+      [columnName]="'Partitions'"
+      [actions]="actions"
+      [paginationOptions]="{ pageSize: 10, pageSizeOptions: [10, 20, 50] }"
+      (pageChange)="onPageChanged($event)"
+    ></app-customTable>
     </div>
   </div>
 </div>
