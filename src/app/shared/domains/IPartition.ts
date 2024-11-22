@@ -1,5 +1,5 @@
 export interface IPartition {
-  partitionName: string;
+  partitionName: number;
   size: number;
   topicName: string;
   lastOffset: number;

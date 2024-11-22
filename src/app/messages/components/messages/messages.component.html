@@ -21,34 +21,33 @@
 </mat-dialog-actions>
 
 <ng-template #replyDialog let-data>
-  <h2 mat-dialog-title>Reenvío del mensaje</h2>
+  <h2 mat-dialog-title>Message Retry</h2>
   <div class="dialog-container">
     <mat-card class="form-container">
       <form [formGroup]="formGroup">
         <mat-form-field appearance="outline">
-          <mat-label>Fecha de envío</mat-label>
+          <mat-label>Send Date</mat-label>
           <input matInput formControlName="timestamp" />
         </mat-form-field>
         <mat-form-field appearance="outline">
-          <mat-label>Partición</mat-label>
+          <mat-label>Partition</mat-label>
           <input matInput formControlName="partition"  />
         </mat-form-field>
         <mat-form-field appearance="outline">
-          <mat-label>Posición</mat-label>
+          <mat-label>Position</mat-label>
           <input matInput formControlName="offset"  />
         </mat-form-field>
         <mat-form-field appearance="outline">
-          <mat-label>Valor</mat-label>
+          <mat-label>Value</mat-label>
           <textarea matInput rows="8" formControlName="value"></textarea>
         </mat-form-field>
         <mat-form-field appearance="outline">
-          <mat-label>Identificador</mat-label>
+          <mat-label>Identifier</mat-label>
           <input matInput formControlName="key"  />
         </mat-form-field>
 
-        <!-- Botón con color y espacio -->
         <div class="form-actions">
-          <button mat-raised-button color="primary" (click)="enviarDatos()">Confirmar</button>
+          <button mat-raised-button color="primary" (click)="enviarDatos()">Confirm</button>
         </div>
       </form>
     </mat-card>

@@ -22,7 +22,7 @@ export class PartitionsHttpService {
     return this.http.get<IPartition[]>(url);
   }
 
-  getAllMensajesByTopicAndPartitions(topic:string,partition:string,offset:number,limit:number):Observable<any>{
+  getAllMensajesByTopicAndPartitions(topic:string,partition:number,offset:number,limit:number):Observable<any>{
     const url = `${this.url}/topics/${topic}/partitions/${partition}/messages?offset=${offset}&limit=${limit}`;
     return this.http.get<any>(url);
   }

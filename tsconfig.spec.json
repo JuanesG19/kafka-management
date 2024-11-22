@@ -4,12 +4,11 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "outDir": "./out-tsc/spec",
-    "types": [
-      "jasmine"
-    ]
+    "types": ["jest", "node"]
   },
   "include": [
-    "src/**/*.spec.ts",
-    "src/**/*.d.ts"
+    //"src/**/*.spec.ts",
+    "src/app/brokers/components/broker/*.spec.ts",
+    //"src/**/*.d.ts"
   ]
 }

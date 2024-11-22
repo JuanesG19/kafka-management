@@ -45,12 +45,6 @@ onPageChanged(event: PageEvent) {
 
   public actions = [
     {
-      label: 'Search',
-      icon: 'search',
-      class: 'text-primary',
-      handler: (element: IPartition) => this.handleSearch(element),
-    },
-    {
       label: 'Messages By Topic',
       icon: 'mail',
       class: 'text-primary',
@@ -105,22 +99,19 @@ onPageChanged(event: PageEvent) {
   }
 
   handleSeeMessage(element: IPartition) {
-    console.log("pagina cambiada 2")
     this.lastSelectedPartition = element; 
     this.fetchMessages();
   }
 
   fetchMessages() {
-    console.log("pagina cambiada 3")
   if (!this.lastSelectedPartition) return; 
 
-  const partitionSplit = this.lastSelectedPartition.partitionName.split("-");
   const { pageIndex, pageSize } = this.currentPagination;
 
   this.partitionService
     .getAllMensajesByTopicAndPartitions(
       this.lastSelectedPartition.topicName,
-      partitionSplit[1],
+      this.lastSelectedPartition.partitionName,
       pageIndex,
       pageSize
     )

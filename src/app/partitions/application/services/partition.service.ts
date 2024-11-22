@@ -19,7 +19,7 @@ export class PartitionsService {
       return this.partitionHttpService.getAllPartitions();
     }
 
-    getAllMensajesByTopicAndPartitions(topic:string,partition:string,offset:number,limit:number): Observable<any>{
+    getAllMensajesByTopicAndPartitions(topic:string,partition:number,offset:number,limit:number): Observable<any>{
       return this.partitionHttpService.getAllMensajesByTopicAndPartitions(topic,partition,offset,limit);
     }
 
