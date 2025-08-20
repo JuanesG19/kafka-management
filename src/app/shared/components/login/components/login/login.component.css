@@ -199,10 +199,10 @@ mat-form-field {
 }
 
 mat-form-field.mat-mdc-form-field {
-  --mdc-filled-text-field-container-color: #f8f9fa;
-  --mdc-outlined-text-field-outline-color: #e0e0e0;
-  --mdc-outlined-text-field-focus-outline-color: #0E4174;
-  --mdc-outlined-text-field-hover-outline-color: #0E4174;
+  --mat-form-field-filled-container-color: #f8f9fa;
+  --mat-form-field-outlined-outline-color: #e0e0e0;
+  --mat-form-field-outlined-focus-outline-color: #0E4174;
+  --mat-form-field-outlined-hover-outline-color: #0E4174;
 }
 
 mat-form-field .mat-mdc-text-field-wrapper {
