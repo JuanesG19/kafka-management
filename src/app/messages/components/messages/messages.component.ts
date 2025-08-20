@@ -19,22 +19,21 @@ import { MessageService } from '../../application/services/messages.service';
 import { PageEvent } from '@angular/material/paginator';
 
 @Component({
-  selector: 'app-messages',
-  standalone: true,
-  templateUrl: './messages.component.html',
-  styleUrl: './messages.component.css',
-  imports: [
-    CommonModule,
-    MatDialogModule,
-    CustomTableComponent,
-    MatFormFieldModule,
-    MatInputModule,
-    MatIconModule,
-    MatGridListModule,
-    MatCardModule,
-    MatButtonModule,
-    ReactiveFormsModule,
-  ],
+    selector: 'app-messages',
+    templateUrl: './messages.component.html',
+    styleUrl: './messages.component.css',
+    imports: [
+        CommonModule,
+        MatDialogModule,
+        CustomTableComponent,
+        MatFormFieldModule,
+        MatInputModule,
+        MatIconModule,
+        MatGridListModule,
+        MatCardModule,
+        MatButtonModule,
+        ReactiveFormsModule,
+    ]
 })
 export class MessagesComponent {
   currentPagination: { pageIndex: number; pageSize: number } = {

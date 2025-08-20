@@ -12,11 +12,10 @@ export interface Element {
 }
 
 @Component({
-  selector: 'app-consumers',
-  templateUrl: './consumers.component.html',
-  styleUrls: ['./consumers.component.css'],
-  standalone: true,
-  imports: [CountCardsComponent, CustomTableComponent],
+    selector: 'app-consumers',
+    templateUrl: './consumers.component.html',
+    styleUrls: ['./consumers.component.css'],
+    imports: [CountCardsComponent, CustomTableComponent]
 })
 export class ConsumersComponent implements OnInit {
   public elementData = signal<Element[]>([]);

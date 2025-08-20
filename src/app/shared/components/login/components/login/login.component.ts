@@ -12,17 +12,16 @@ import {
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-login',
-  standalone: true,
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css'],
-  imports: [
-    MatCardModule,
-    MatInputModule,
-    MatIconModule,
-    MatButtonModule,
-    ReactiveFormsModule,
-  ],
+    selector: 'app-login',
+    templateUrl: './login.component.html',
+    styleUrls: ['./login.component.css'],
+    imports: [
+        MatCardModule,
+        MatInputModule,
+        MatIconModule,
+        MatButtonModule,
+        ReactiveFormsModule,
+    ]
 })
 export class LoginComponent {
   hide = signal(true);

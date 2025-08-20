@@ -4,11 +4,10 @@ import { RouterOutlet } from '@angular/router';
 import { BrokersService } from './brokers/application/services/brokers.service';
 
 @Component({
-  selector: 'app-root',
-  standalone: true,
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.css',
-  imports: [RouterOutlet, LoginComponent],
+    selector: 'app-root',
+    templateUrl: './app.component.html',
+    styleUrl: './app.component.css',
+    imports: [RouterOutlet, LoginComponent]
 })
 export class AppComponent implements OnInit{
   title = 'angular-electron';

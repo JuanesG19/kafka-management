@@ -15,11 +15,10 @@ export interface Element {
 }
 
 @Component({
-  selector: 'app-topics',
-  templateUrl: './topics.component.html',
-  styleUrls: ['./topics.component.css'],
-  standalone: true,
-  imports: [CountCardsComponent, CustomTableComponent, GlobalLoadingComponent],
+    selector: 'app-topics',
+    templateUrl: './topics.component.html',
+    styleUrls: ['./topics.component.css'],
+    imports: [CountCardsComponent, CustomTableComponent, GlobalLoadingComponent]
 })
 export class TopicsComponent implements OnInit {
   currentPagination: { pageIndex: number; pageSize: number } = {

@@ -19,21 +19,20 @@ interface MenuItem {
 }
 
 @Component({
-  selector: 'app-layout',
-  templateUrl: './layout.component.html',
-  styleUrls: ['./layout.component.css'],
-  standalone: true,
-  imports: [
-    MatSidenavModule,
-    MatToolbarModule,
-    FooterComponent,
-    NavbarComponent,
-    MatIconModule,
-    MatDividerModule,
-    RouterOutlet,
-    RouterLink,
-    MatListModule,
-  ],
+    selector: 'app-layout',
+    templateUrl: './layout.component.html',
+    styleUrls: ['./layout.component.css'],
+    imports: [
+        MatSidenavModule,
+        MatToolbarModule,
+        FooterComponent,
+        NavbarComponent,
+        MatIconModule,
+        MatDividerModule,
+        RouterOutlet,
+        RouterLink,
+        MatListModule,
+    ]
 })
 export class LayoutComponent  {
 

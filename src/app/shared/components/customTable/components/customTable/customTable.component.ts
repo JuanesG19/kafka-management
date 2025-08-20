@@ -21,18 +21,17 @@ interface Column {
 }
 
 @Component({
-  selector: 'app-customTable',
-  templateUrl: './customTable.component.html',
-  styleUrls: ['./customTable.component.css'],
-  standalone: true,
-  imports: [
-    CommonModule,
-    MatTableModule,
-    MatPaginatorModule,
-    MatSortModule,
-    MatInputModule,
-    MatIconModule,
-  ],
+    selector: 'app-customTable',
+    templateUrl: './customTable.component.html',
+    styleUrls: ['./customTable.component.css'],
+    imports: [
+        CommonModule,
+        MatTableModule,
+        MatPaginatorModule,
+        MatSortModule,
+        MatInputModule,
+        MatIconModule,
+    ]
 })
 export class CustomTableComponent implements OnInit, AfterViewInit {
   private _data: any[] = [];

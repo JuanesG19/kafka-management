@@ -13,19 +13,18 @@ import { MatProgressSpinner } from '@angular/material/progress-spinner';
 import { BrokersService } from '../../application/services/brokers.service';
 
 @Component({
-  selector: 'app-brokers',
-  templateUrl: './brokers.component.html',
-  styleUrls: ['./brokers.component.css'],
-  standalone: true,
-  imports: [
-    MatDialogModule,
-    MatButtonModule,
-    MatInputModule,
-    MatFormFieldModule,
-    MatIconModule,
-    ReactiveFormsModule,
-    MatProgressSpinner,
-  ],
+    selector: 'app-brokers',
+    templateUrl: './brokers.component.html',
+    styleUrls: ['./brokers.component.css'],
+    imports: [
+        MatDialogModule,
+        MatButtonModule,
+        MatInputModule,
+        MatFormFieldModule,
+        MatIconModule,
+        ReactiveFormsModule,
+        MatProgressSpinner,
+    ]
 })
 export class BrokersComponent {
   dialogForm = this.fb.nonNullable.group({

@@ -11,11 +11,10 @@ import { IPartition } from '../../../shared/domains/IPartition';
 import { PageEvent } from '@angular/material/paginator';
 
 @Component({
-  selector: 'app-partitions',
-  templateUrl: './partitions.component.html',
-  styleUrls: ['./partitions.component.css'],
-  standalone: true,
-  imports: [CountCardsComponent, CustomTableComponent, GlobalLoadingComponent],
+    selector: 'app-partitions',
+    templateUrl: './partitions.component.html',
+    styleUrls: ['./partitions.component.css'],
+    imports: [CountCardsComponent, CustomTableComponent, GlobalLoadingComponent]
 })
 export class PartitionsComponent implements OnInit {
   public idTopic = signal<string>('');

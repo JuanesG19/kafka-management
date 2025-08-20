@@ -10,19 +10,18 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-navbar',
-  standalone: true,
-  templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.css'],
-  imports: [
-    MatToolbarModule,
-    MatMenuModule,
-    MatIconModule,
-    MatFormFieldModule,
-    MatSelectModule,
-    MatInputModule,
-    FormsModule,
-  ],
+    selector: 'app-navbar',
+    templateUrl: './navbar.component.html',
+    styleUrls: ['./navbar.component.css'],
+    imports: [
+        MatToolbarModule,
+        MatMenuModule,
+        MatIconModule,
+        MatFormFieldModule,
+        MatSelectModule,
+        MatInputModule,
+        FormsModule,
+    ]
 })
 export class NavbarComponent{
   constructor(private readonly router: Router) {}
