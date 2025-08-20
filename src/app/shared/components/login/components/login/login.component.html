@@ -1,42 +1,52 @@
 <div class="login-container">
-  <div class="login-image">
-    <img
-      src="https://www.ceupe.pe/images/easyblog_articles/260/b2ap3_large_Los-5-secretos-de-una-buena-gestin.jpg"
-      alt="Login"
-    />
+  <div class="visual-side">
+    <div class="floating-elements">
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+    </div>
+    
+    <div class="brand-content">
+      <div class="kafka-icon">
+        <mat-icon>stream</mat-icon>
+      </div>
+      <h1>Kafka Management</h1>
+      <p>Plataforma avanzada para la gestión y monitoreo de Apache Kafka</p>
+    </div>
   </div>
-  <div class="login-form">
-    <mat-card>
-      <mat-card-title class="cardTitle">Login</mat-card-title>
+
+  <div class="form-side">
+    <mat-card class="glass-card">
+      <mat-card-title class="cardTitle">Kafka Management</mat-card-title>
+      <mat-card-subtitle>Ingresa tus credenciales</mat-card-subtitle>
+      
       <mat-card-content>
         <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
           <mat-form-field appearance="fill">
             <mat-label>Usuario</mat-label>
-            <input
-              matInput
-              formControlName="username"
-              placeholder="Usuario"
-              required
-            />
+            <input matInput formControlName="username" />
+            <mat-icon matSuffix>person</mat-icon>
           </mat-form-field>
+
           <mat-form-field appearance="fill">
             <mat-label>Contraseña</mat-label>
-            <input
-              matInput
-              type="password"
-              formControlName="password"
-              placeholder="Contraseña"
-              required
-            />
+            <input matInput [type]="hide() ? 'password' : 'text'" formControlName="password" />
+            <button mat-icon-button matSuffix (click)="clickEvent($event)" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide()">
+              <mat-icon>{{hide() ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
           </mat-form-field>
-          <button mat-raised-button color="primary" type="submit">
+
+          <button mat-raised-button class="login-button" type="submit">
+            <mat-icon>login</mat-icon>
             Ingresar
           </button>
         </form>
+
         @if(errorMessage){
-        <div class="error-message">
+        <mat-card class="error-card">
+          <mat-icon>error</mat-icon>
           {{ errorMessage }}
-        </div>
+        </mat-card>
         }
       </mat-card-content>
     </mat-card>

@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 import {
   FormGroup,
   Validators,
@@ -18,11 +19,13 @@ import { Router } from '@angular/router';
   imports: [
     MatCardModule,
     MatInputModule,
+    MatIconModule,
     MatButtonModule,
     ReactiveFormsModule,
   ],
 })
 export class LoginComponent {
+  hide = signal(true);
   loginForm: FormGroup;
   errorMessage: string | null = null;
 
@@ -31,6 +34,11 @@ export class LoginComponent {
       username: ['', Validators.required],
       password: ['', Validators.required],
     });
+  }
+
+  clickEvent(event: MouseEvent) {
+    this.hide.set(!this.hide());
+    event.stopPropagation();
   }
 
   onSubmit() {

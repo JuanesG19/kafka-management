@@ -4,9 +4,11 @@
   "main": "main.js",
   "scripts": {
     "test:coverage": "jest --coverage",
-    "test:watch":"jest --watch",
+    "test:watch": "jest --watch",
     "ng": "ng",
-    "start": "ng build && electron .",
+    "start": "ng build --watch && electron .",
+    "serve": "npx ng serve",
+    "electron": "electron .",
     "lint": "ng lint",
     "sonar": "node_modules/.bin/sonar-scanner",
     "build": "ng build",
@@ -35,7 +37,7 @@
   "devDependencies": {
     "@angular-builders/jest": "^18.0.0",
     "@angular-devkit/build-angular": "^18.0.3",
-    "@angular/cli": "^18.0.3",
+    "@angular/cli": "^20.2.0",
     "@angular/compiler-cli": "^18.0.0",
     "@types/jasmine": "~5.1.0",
     "@types/jest": "^29.5.14",

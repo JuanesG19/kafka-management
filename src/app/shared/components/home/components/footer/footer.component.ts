@@ -1,4 +1,4 @@
-import { Component} from '@angular/core';
+import { Component, signal } from '@angular/core';
 
 import { MatToolbarModule } from '@angular/material/toolbar';
 
@@ -9,6 +9,8 @@ import { MatToolbarModule } from '@angular/material/toolbar';
   styleUrls: ['./footer.component.css'],
   imports: [MatToolbarModule],
 })
-export class FooterComponent  {
-  constructor() {}
+export class FooterComponent {
+  public currentYear = signal<number>(new Date().getFullYear());
+
+  constructor() { }
 }

@@ -1,34 +1,30 @@
-<mat-drawer-container class="flex-1 h-full">
-  <mat-drawer #drawer mode="side" opened class="h-full max-w-56">
-    <mat-toolbar
-      class="drawer-header flex justify-between items-center bg-gray-900 text-white"
-    >
-      <div class="drawer-title text-lg font-bold">Menu</div>
-      <mat-icon
-        class="drawer-close cursor-pointer text-2xl"
-        (click)="drawer.close()"
-        (keydown.enter)="drawer.close()"
-        >close</mat-icon
-      >
+<mat-drawer-container class="drawer-container" (mousemove)="onMouseMove($event)">
+  <mat-drawer #drawer mode="side" class="drawer" (mouseleave)="drawer.close()">
+    <mat-toolbar class="drawer-header">
+      <div class="drawer-title">Menú</div>
+      <mat-icon class="drawer-close" (click)="drawer.close()" (keydown.enter)="drawer.close()">
+        close
+      </mat-icon>
     </mat-toolbar>
-    <mat-divider class="drawer-divider bg-gray-700"></mat-divider>
-    <mat-list class="drawer-content flex flex-col flex-1 p-4 pa-0">
-      @for(item of menuItems; track item){<mat-list-item
-        class="drawer-link"
-        [routerLink]="item.route"
-        (click)="item.action && item.action()"
-        (keydown.enter)="item.action && item.action()"
-      >
-        <mat-icon matListItemIcon>{{ item.icon }}</mat-icon>
-        <div matListItemTitle>
-          {{ item.label }}
-        </div> </mat-list-item
-      >}
+
+    <mat-list class="drawer-content">
+      @for(item of menuItems; track item) {
+      <mat-list-item class="drawer-link" [routerLink]="item.route" routerLinkActive="active-link"
+        (click)="item.action && item.action()" (keydown.enter)="item.action && item.action()">
+        <mat-icon matListItemIcon class="drawer-icon">{{ item.icon }}</mat-icon>
+        <div matListItemTitle class="drawer-text">{{ item.label }}</div>
+      </mat-list-item>
+      }
     </mat-list>
   </mat-drawer>
 
-  <mat-drawer-content>
+ <mat-drawer-content class="main-content">
     <app-navbar (toggleDrawer)="drawer.toggle()"></app-navbar>
-    <router-outlet class="flex-1 overflow-y-auto"></router-outlet>
+    <div class="content-wrapper">
+      <router-outlet></router-outlet>
+    </div>
+
+    <app-footer class="footer"></app-footer>
   </mat-drawer-content>
+  
 </mat-drawer-container>

@@ -3,13 +3,17 @@ import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { DashboardService } from '../../application/services/dashboard.service';
 import { MatGridListModule } from '@angular/material/grid-list';
+import { MetricsResponse } from '../../domain/MetricsResponse';
+import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css'],
-  imports: [RouterOutlet, RouterLink, RouterLinkActive, MatGridListModule],
+  imports: [RouterLink, MatGridListModule, MatCardModule,MatButtonModule, MatTooltipModule],
 })
 export class DashboardComponent implements OnInit {
   private readonly _snackBar = inject(MatSnackBar);
@@ -17,6 +21,8 @@ export class DashboardComponent implements OnInit {
   public consumers = signal<number>(0);
   public topics = signal<number>(0);
   public partitions = signal<number>(0);
+  public metrics: MetricsResponse | null = null;
+
 
   counts = [
     {
@@ -39,14 +45,23 @@ export class DashboardComponent implements OnInit {
     },
   ];
 
-  panels = ['Panel 1', 'Panel 2', 'Panel 3', 'Panel 4'];
-
-  constructor(private readonly dashboardService: DashboardService) {}
+  constructor(private readonly dashboardService: DashboardService) { }
 
   ngOnInit() {
     this.getDashboardConsumers();
     this.getDashboardTopics();
     this.getDashboardPartitions();
+    this.getMetrics();
+  }
+
+  getMetrics() {
+    this.dashboardService.getMetrics().subscribe({
+      next: (res) => {
+        this.metrics = res;
+        console.log('Metrics:', res);
+      },
+      error: (err) => console.error(err),
+    });
   }
 
   getDashboardConsumers() {

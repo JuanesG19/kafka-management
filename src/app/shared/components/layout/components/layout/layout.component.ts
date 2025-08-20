@@ -1,10 +1,11 @@
-import { Component} from '@angular/core';
+import { Component, ViewChild} from '@angular/core';
 import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
-import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatDrawer, MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { NavbarComponent } from '../../../home/components/navbar/navbar.component';
+import { FooterComponent } from '../../../home/components/footer/footer.component';
 import {MatListModule} from '@angular/material/list';
 
 interface MenuItem {
@@ -25,6 +26,7 @@ interface MenuItem {
   imports: [
     MatSidenavModule,
     MatToolbarModule,
+    FooterComponent,
     NavbarComponent,
     MatIconModule,
     MatDividerModule,
@@ -34,6 +36,10 @@ interface MenuItem {
   ],
 })
 export class LayoutComponent  {
+
+    @ViewChild('drawer') drawer!: MatDrawer;
+
+    
   menuItems: MenuItem[] = [
     {
       icon: 'home',
@@ -69,5 +75,15 @@ export class LayoutComponent  {
     localStorage.removeItem("broker");
     this.router.navigate(['/home']);
     location.reload();  
+  }
+
+  onMouseMove(event: MouseEvent): void {
+    const leftEdgeThreshold = 20;
+    
+    if (event.clientX <= leftEdgeThreshold) {
+      if (!this.drawer.opened) {
+        this.drawer.open();
+      }
+    }
   }
 }

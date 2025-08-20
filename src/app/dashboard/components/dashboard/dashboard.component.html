@@ -1,29 +1,70 @@
 <div class="dashboard-container">
-  <mat-grid-list
-    cols="3"
-    rowHeight="200px"
-    gutterSize="16px"
-    class="dashboard-grid"
-  >
-    <!-- Primer Row: Conteos -->
-    @for(count of counts; track count){<mat-grid-tile
-      colspan="1"
-      rowspan="1"
-      class="count-tile"
-    >
+  <mat-grid-list cols="3" rowHeight="100px" gutterSize="16px" class="dashboard-grid">
+    @for(count of counts; track count){<mat-grid-tile colspan="1" rowspan="1" class="count-tile">
       <a [routerLink]="count.link" class="panel" [style]="count.style">
-        <div class="title text-secondary">{{ count.title }}</div>
-        <div class="value text-primary">{{ count.value }}</div>
-      </a> </mat-grid-tile
-    >}
-
-    <!-- Segundo Row: Paneles -->
-    @for(panel of panels; track panel){<mat-grid-tile
-      colspan="3"
-      rowspan="1"
-      class="panel-tile"
-    >
-      <div class="panel">{{ panel }}</div> </mat-grid-tile
-    >}
+        <div class="title">{{ count.title }}</div>
+        <div class="value">{{ count.value }}</div>
+      </a>
+    </mat-grid-tile>}
   </mat-grid-list>
+
+  <div style="height: 10px;"></div>
+
+  <mat-grid-list cols="1" rowHeight="450px" gutterSize="16px">
+    <mat-grid-tile>
+      <mat-card class="metrics-panel" appearance="outlined">
+        <mat-card-header>
+          <div class="header-content">
+            <mat-card-title class="metrics-title">Metrics Overview</mat-card-title>
+            <button mat-flat-button (click)="getMetrics()" class="refresh-btn">
+              Refresh
+            </button>
+          </div>
+        </mat-card-header>
+
+        <mat-card-content class="metrics-cards">
+          <mat-card class="metric-card" matTooltip="Total de conexiones creadas al broker">
+            <div class="metric-name">Connections</div>
+            <div class="metric-value">{{ metrics?.['connection-creation-total'] }}</div>
+          </mat-card>
+
+          <mat-card class="metric-card" matTooltip="Número total de requests recibidos">
+            <div class="metric-name">Requests Total</div>
+            <div class="metric-value">{{ metrics?.['request-total'] }}</div>
+          </mat-card>
+
+          <mat-card class="metric-card" matTooltip="Total de bytes enviados/recibidos en la red">
+            <div class="metric-name">Network IO Total</div>
+            <div class="metric-value">{{ metrics?.['network-io-total'] }}</div>
+          </mat-card>
+
+          <mat-card class="metric-card" matTooltip="Tiempo que el sistema estuvo esperando I/O">
+            <div class="metric-name">IO Wait Ratio</div>
+            <div class="metric-value">{{ metrics?.['io-wait-ratio'] }}</div>
+          </mat-card>
+
+          <mat-card class="metric-card" matTooltip="Requests por segundo">
+            <div class="metric-name">Request Rate</div>
+            <div class="metric-value">{{ metrics?.['request-rate'] }}</div>
+          </mat-card>
+
+          <mat-card class="metric-card" matTooltip="Total de operaciones de selección (lecturas)">
+            <div class="metric-name">Select Total</div>
+            <div class="metric-value">{{ metrics?.['select-total'] }}</div>
+          </mat-card>
+
+          <mat-card class="metric-card" matTooltip="Número actual de conexiones abiertas">
+            <div class="metric-name">Connection Count</div>
+            <div class="metric-value">{{ metrics?.['connection-count'] }}</div>
+          </mat-card>
+
+          <mat-card class="metric-card" matTooltip="Bytes enviados desde el broker">
+            <div class="metric-name">Outgoing Bytes</div>
+            <div class="metric-value">{{ metrics?.['outgoing-byte-total'] }}</div>
+          </mat-card>
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+  </mat-grid-list>
+
 </div>
