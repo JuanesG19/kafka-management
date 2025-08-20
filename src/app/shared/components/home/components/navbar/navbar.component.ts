@@ -8,6 +8,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatSelectModule } from '@angular/material/select';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { Router } from '@angular/router';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
     selector: 'app-navbar',
@@ -22,6 +23,7 @@ import { Router } from '@angular/router';
         MatSelectModule,
         MatInputModule,
         FormsModule,
+        MatButtonModule
     ]
 })
 export class NavbarComponent{
@@ -29,7 +31,8 @@ export class NavbarComponent{
 
   @Output() toggleDrawer = new EventEmitter<void>();
 
-  onLogout() {
-    this.router.navigate(['/login']);
+  logout() {
+    console.log('Cerrando sesión...');
+    this.router.navigate(['']);
   }
 }

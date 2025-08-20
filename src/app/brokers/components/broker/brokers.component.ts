@@ -13,19 +13,19 @@ import { MatProgressSpinner } from '@angular/material/progress-spinner';
 import { BrokersService } from '../../application/services/brokers.service';
 
 @Component({
-    selector: 'app-brokers',
-    standalone: true,
-    templateUrl: './brokers.component.html',
-    styleUrls: ['./brokers.component.css'],
-    imports: [
-        MatDialogModule,
-        MatButtonModule,
-        MatInputModule,
-        MatFormFieldModule,
-        MatIconModule,
-        ReactiveFormsModule,
-        MatProgressSpinner,
-    ]
+  selector: 'app-brokers',
+  standalone: true,
+  templateUrl: './brokers.component.html',
+  styleUrls: ['./brokers.component.css'],
+  imports: [
+    MatDialogModule,
+    MatButtonModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatIconModule,
+    ReactiveFormsModule,
+    MatProgressSpinner,
+  ]
 })
 export class BrokersComponent {
   dialogForm = this.fb.nonNullable.group({
@@ -51,13 +51,21 @@ export class BrokersComponent {
 
       this.brokerService.selectBroker(code).subscribe({
         next: (response) => {
-          this.dialogRef.close({
-            success: true,
-            code,
-            data: response
-          });
-          localStorage.setItem('broker', code);
-          this.isLoading.set(false);
+          let res = JSON.parse(response);
+          if (res.status === 'error') {
+            this.errorMessage.set("Error, try again");
+            this.isLoading.set(false);
+          }
+          else {
+            localStorage.setItem('broker', code);
+            this.isLoading.set(false);
+            this.dialogRef.close({
+              success: true,
+              code,
+              data: res
+            });
+          }
+
         },
         error: (response) => {
           console.log(response)

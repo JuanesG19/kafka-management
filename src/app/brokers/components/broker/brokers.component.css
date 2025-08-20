@@ -1,24 +1,67 @@
 .dialog-container {
-  padding: 20px;
-  min-width: 350px;
+  font-family: 'Roboto', sans-serif;
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.15);
 }
-.full-width {
+
+.dialog-header {
+  background: linear-gradient(135deg, #0E4174 0%, #0477BA 100%);
+  color: #fff;
+  padding: 16px 20px;
+  text-align: center;
+}
+
+.dialog-header h2 {
+  margin: 0;
+  font-size: 1.4rem;
+  font-weight: 500;
+}
+
+.dialog-content {
+  padding: 20px;
+}
+
+mat-form-field {
   width: 100%;
 }
-mat-dialog-content {
-  margin: 20px 0;
-}
+
 .error-message {
   color: #f44336;
-  margin-top: 10px;
   font-size: 0.85em;
 }
+
 mat-dialog-actions {
+  display: flex;
   justify-content: flex-end;
+  padding: 16px 20px;
 }
-button {
+
+.validate-button {
+  background: linear-gradient(135deg, #0E4174 0%, #0477BA 100%);
+  color: #fff !important;
+  font-weight: 500;
   min-width: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.2s;
 }
+
+.validate-button:hover:not(:disabled) {
+  background: linear-gradient(135deg, #0477BA 0%, #0E4174 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.validate-button:disabled {
+  background: rgba(14,65,116,0.4);
+  color: rgba(255,255,255,0.7) !important;
+  cursor: not-allowed;
+}
+
 mat-spinner {
   margin: 0 auto;
 }

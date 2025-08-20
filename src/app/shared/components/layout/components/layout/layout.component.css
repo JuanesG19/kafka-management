@@ -9,6 +9,12 @@
   padding: 0;
 }
 
+.drawer-logout {
+  padding: 16px;
+  text-align: center;
+}
+
+
 .drawer {
   width: 240px;
   background: #f9fafb;

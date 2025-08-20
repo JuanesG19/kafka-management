@@ -9,7 +9,7 @@ import { Routes } from '@angular/router';
 import { TopicsComponent } from './topics/components/topic/topics.component';
 
 export const routes: Routes = [
-  { path: '', component: LoginComponent },
+  { path: 'login', component: LoginComponent },
   {
     path: '',
     component: LayoutComponent,

@@ -1,14 +1,14 @@
-<mat-toolbar color="primary">
-  <div class="flex">
-    <button mat-icon-button class="menu-button" (click)="toggleDrawer.emit()">
-      <mat-icon>menu</mat-icon>
-    </button>
-    <span class="title">Kafka Monitor</span>
-  </div>
+<mat-toolbar class="app-toolbar">
+  <button mat-icon-button class="menu-button" (click)="toggleDrawer.emit()">
+    <mat-icon>menu</mat-icon>
+  </button>
+
+  <span class="title">Kafka Monitor</span>
+
   <span class="spacer"></span>
-  <img
-    src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
-    alt="User"
-    class="user-image"
-  />
+
+  <button mat-stroked-button class="logout-button" (click)="logout()">
+    <mat-icon>logout</mat-icon>
+    <span class="logout-text">Logout</span>
+  </button>
 </mat-toolbar>

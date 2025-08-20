@@ -123,8 +123,7 @@ mat-grid-tile {
 }
 
 .metric-card {
-  flex: 1 1 calc(50% - 16px);
-  /* 2 columnas dentro del panel */
+  flex: 1 1 calc(33.33% - 16px); /* 3 columnas por defecto */
   background: #f0f4f8;
   border-radius: 8px;
   padding: 12px;
@@ -161,6 +160,14 @@ mat-grid-tile {
     cols: 2 !important;
     /* tablet */
   }
+  .metric-card {
+    flex: 1 1 calc(50% - 16px); /* 2 columnas */
+  }
+
+    /* Tablet: 2 columnas */
+  .dashboard-grid {
+    cols: 2 !important;
+  }
 }
 
 @media (max-width: 768px) {
@@ -173,11 +180,46 @@ mat-grid-tile {
     padding: 4px;
   }
 
-  .metrics-cards {
-    flex-direction: column;
+  .metric-card {
+    flex: 1 1 100%; /* 1 columna */
   }
 
+  .metrics-cards {
+    gap: 12px;
+  }
+
+  .dashboard-grid {
+    cols: 1 !important;
+  }
+
+  mat-grid-tile.count-tile {
+    padding: 4px;
+  }
+
+  .count-tile .panel {
+    padding: 16px; /* menos padding para móviles */
+  }
+
+  .panel .title {
+    font-size: 14px;
+  }
+
+  .panel .value {
+    font-size: 22px;
+  }
+}
+
+/* Muy pequeño */
+@media (max-width: 480px) {
   .metric-card {
-    flex: 1 1 100%;
+    padding: 8px;
+  }
+
+  .metric-name {
+    font-size: 12px;
+  }
+
+  .metric-value {
+    font-size: 18px;
   }
 }

@@ -16,9 +16,13 @@
       </mat-list-item>
       }
     </mat-list>
+
+    <div class="drawer-logout">
+      <button mat-raised-button color="warn" (click)="logout()">Logout</button>
+    </div>
   </mat-drawer>
 
- <mat-drawer-content class="main-content">
+  <mat-drawer-content class="main-content">
     <app-navbar (toggleDrawer)="drawer.toggle()"></app-navbar>
     <div class="content-wrapper">
       <router-outlet></router-outlet>
@@ -26,5 +30,5 @@
 
     <app-footer class="footer"></app-footer>
   </mat-drawer-content>
-  
+
 </mat-drawer-container>
