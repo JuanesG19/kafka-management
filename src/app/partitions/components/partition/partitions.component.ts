@@ -12,6 +12,7 @@ import { PageEvent } from '@angular/material/paginator';
 
 @Component({
     selector: 'app-partitions',
+    standalone: true,
     templateUrl: './partitions.component.html',
     styleUrls: ['./partitions.component.css'],
     imports: [CountCardsComponent, CustomTableComponent, GlobalLoadingComponent]

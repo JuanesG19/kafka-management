@@ -5,6 +5,7 @@ import { DashboardService } from '../../../../../dashboard/application/services/
 
 @Component({
     selector: 'app-countCards',
+    standalone: true,
     templateUrl: './countCards.component.html',
     styleUrls: ['./countCards.component.css'],
     imports: [RouterLink]

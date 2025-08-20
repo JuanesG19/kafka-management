@@ -20,6 +20,7 @@ interface MenuItem {
 
 @Component({
     selector: 'app-layout',
+    standalone: true,
     templateUrl: './layout.component.html',
     styleUrls: ['./layout.component.css'],
     imports: [

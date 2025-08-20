@@ -16,6 +16,7 @@ export interface Element {
 
 @Component({
     selector: 'app-topics',
+    standalone: true,
     templateUrl: './topics.component.html',
     styleUrls: ['./topics.component.css'],
     imports: [CountCardsComponent, CustomTableComponent, GlobalLoadingComponent]

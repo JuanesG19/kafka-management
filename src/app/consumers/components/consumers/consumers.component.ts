@@ -13,6 +13,7 @@ export interface Element {
 
 @Component({
     selector: 'app-consumers',
+    standalone: true,
     templateUrl: './consumers.component.html',
     styleUrls: ['./consumers.component.css'],
     imports: [CountCardsComponent, CustomTableComponent]

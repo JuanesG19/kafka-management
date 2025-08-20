@@ -5,6 +5,7 @@ import { BrokersService } from './brokers/application/services/brokers.service';
 
 @Component({
     selector: 'app-root',
+    standalone: true,
     templateUrl: './app.component.html',
     styleUrl: './app.component.css',
     imports: [RouterOutlet, LoginComponent]

@@ -14,6 +14,7 @@ import { BrokersService } from '../../application/services/brokers.service';
 
 @Component({
     selector: 'app-brokers',
+    standalone: true,
     templateUrl: './brokers.component.html',
     styleUrls: ['./brokers.component.css'],
     imports: [

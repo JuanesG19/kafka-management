@@ -13,6 +13,7 @@ import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-login',
+    standalone: true,
     templateUrl: './login.component.html',
     styleUrls: ['./login.component.css'],
     imports: [

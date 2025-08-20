@@ -22,6 +22,7 @@ interface Column {
 
 @Component({
     selector: 'app-customTable',
+    standalone: true,
     templateUrl: './customTable.component.html',
     styleUrls: ['./customTable.component.css'],
     imports: [

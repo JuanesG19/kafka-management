@@ -20,6 +20,7 @@ import { PageEvent } from '@angular/material/paginator';
 
 @Component({
     selector: 'app-messages',
+    standalone: true,
     templateUrl: './messages.component.html',
     styleUrl: './messages.component.css',
     imports: [
