@@ -7,6 +7,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { NavbarComponent } from '../../../home/components/navbar/navbar.component';
 import { FooterComponent } from '../../../home/components/footer/footer.component';
 import { MatListModule } from '@angular/material/list';
+import { AuthKeycloackService } from '../../../../auth/application/services/auth-keycloack.service';
 
 interface MenuItem {
   icon: string;
@@ -68,7 +69,7 @@ export class LayoutComponent {
     }
   ];
 
-  constructor(private readonly router: Router) { }
+  constructor(private readonly router: Router, private readonly authService: AuthKeycloackService) { }
 
   changeBroker() {
     localStorage.removeItem("broker");
@@ -78,7 +79,8 @@ export class LayoutComponent {
 
   logout() {
     console.log('Cerrando sesión...');
-    this.router.navigate(['/']);
+    this.router.navigate(['']);
+    this.authService.logout();
   }
 
   onMouseMove(event: MouseEvent): void {

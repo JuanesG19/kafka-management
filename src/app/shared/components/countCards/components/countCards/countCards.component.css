@@ -17,11 +17,11 @@
   align-items: center;
   flex: 1 1 200px;
   min-width: 200px;
+  border: 1px solid #79B2D7;
 }
 
 .panel:hover {
   background-color: #d9eaf3;
-  border: 1px solid #79B2D7;
 }
 
 .panel .title {

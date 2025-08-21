@@ -99,9 +99,15 @@ mat-grid-tile {
 
 
 @keyframes spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
 }
+
 .metrics-header {
   display: flex;
   justify-content: space-between;
@@ -123,7 +129,8 @@ mat-grid-tile {
 }
 
 .metric-card {
-  flex: 1 1 calc(33.33% - 16px); /* 3 columnas por defecto */
+  flex: 1 1 calc(33.33% - 16px);
+  /* 3 columnas por defecto */
   background: #f0f4f8;
   border-radius: 8px;
   padding: 12px;
@@ -133,6 +140,30 @@ mat-grid-tile {
   align-items: center;
   min-width: 120px;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.metric-card.good {
+  border-left: 4px solid #4caf50;
+  /* verde */
+  background: #e8f5e9;
+}
+
+.metric-card.warn {
+  border-left: 4px solid #ff9800;
+  /* naranja */
+  background: #fff3e0;
+}
+
+.metric-card.bad {
+  border-left: 4px solid #f44336;
+  /* rojo */
+  background: #ffebee;
+}
+
+.metric-card.neutral {
+  border-left: 4px solid #9e9e9e;
+  /* gris */
+  background: #f5f5f5;
 }
 
 .metric-card:hover {
@@ -154,17 +185,21 @@ mat-grid-tile {
   color: #0077b6;
 }
 
+
+
 /* -------------------- Responsivo -------------------- */
 @media (max-width: 1024px) {
   mat-grid-list {
     cols: 2 !important;
     /* tablet */
   }
+
   .metric-card {
-    flex: 1 1 calc(50% - 16px); /* 2 columnas */
+    flex: 1 1 calc(50% - 16px);
+    /* 2 columnas */
   }
 
-    /* Tablet: 2 columnas */
+  /* Tablet: 2 columnas */
   .dashboard-grid {
     cols: 2 !important;
   }
@@ -179,9 +214,11 @@ mat-grid-tile {
   mat-grid-tile {
     padding: 4px;
   }
+  
 
   .metric-card {
-    flex: 1 1 100%; /* 1 columna */
+    flex: 1 1 100%;
+    /* 1 columna */
   }
 
   .metrics-cards {
@@ -197,7 +234,8 @@ mat-grid-tile {
   }
 
   .count-tile .panel {
-    padding: 16px; /* menos padding para móviles */
+    padding: 16px;
+    /* menos padding para móviles */
   }
 
   .panel .title {

@@ -77,18 +77,15 @@
 }
 
 .brand-content {
-  position: relative;
-  z-index: 2;
   text-align: center;
   color: white;
-  padding: 40px;
 }
 
 .kafka-icon {
-  width: 80px;
-  height: 80px;
+  width: 100px;
+  height: 100px;
   background: rgba(255, 255, 255, 0.15);
-  border-radius: 20px;
+  border-radius: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -99,7 +96,12 @@
 }
 
 .kafka-icon mat-icon {
-  font-size: 40px;
+  font-size: 60px;
+  color: white;
+  line-height: 1;
+  /* evita que se corte */
+  width: 60px;
+  height: 60px;
   color: white;
 }
 
@@ -307,7 +309,7 @@ mat-form-field .mat-mdc-form-field-focus-overlay {
   }
 
   .brand-content .kafka-icon {
-    margin-top: 50px;
+    margin-top: 0px;
     margin-bottom: 0px;
   }
 

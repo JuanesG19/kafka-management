@@ -9,6 +9,7 @@ import { Routes } from '@angular/router';
 import { TopicsComponent } from './topics/components/topic/topics.component';
 
 export const routes: Routes = [
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   {
     path: '',

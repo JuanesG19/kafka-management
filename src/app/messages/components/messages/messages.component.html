@@ -1,6 +1,6 @@
 <mat-dialog-content>
   <div class="dialog-container">
-    @if(data.messages.length > 0) {
+    @if (data.messages.length > 0) {
       <app-customTable
         [data]="data.messages"
         [columns]="columnsDefinitions"
@@ -8,48 +8,60 @@
         [actions]="actions"
         [paginationOptions]="{ pageSize: 10, pageSizeOptions: [10, 20, 50] }"
         (pageChange)="onPageChanged($event)"
-      >
-      </app-customTable>
+      ></app-customTable>
     } @else {
-      <h2 mat-dialog-content class="text-center">No hay mensaje para mostrar</h2>
+      <div class="no-messages">
+        <mat-icon class="empty-icon" color="accent">mail_outline</mat-icon>
+        <p>No hay mensajes para mostrar</p>
+      </div>
     }
   </div>
 </mat-dialog-content>
 
-<mat-dialog-actions class="text-right">
-  <button mat-button (click)="onClose()">Close</button>
+<mat-dialog-actions align="end">
+  <button mat-stroked-button color="warn" (click)="onClose()">Cerrar</button>
 </mat-dialog-actions>
 
+<!-- Diálogo secundario -->
 <ng-template #replyDialog let-data>
-  <h2 mat-dialog-title>Message Retry</h2>
-  <div class="dialog-container">
+  <h2 mat-dialog-title class="dialog-title">
+    <mat-icon class="title-icon" color="primary">refresh</mat-icon>
+    Reintentar Mensaje
+  </h2>
+
+  <mat-dialog-content>
     <mat-card class="form-container">
       <form [formGroup]="formGroup">
         <mat-form-field appearance="outline">
-          <mat-label>Send Date</mat-label>
-          <input matInput formControlName="timestamp" />
+          <mat-label>📅 Fecha de envío</mat-label>
+          <input matInput formControlName="timestamp" placeholder="YYYY-MM-DD HH:mm:ss"/>
         </mat-form-field>
+
         <mat-form-field appearance="outline">
-          <mat-label>Partition</mat-label>
-          <input matInput formControlName="partition"  />
+          <mat-label>📂 Partición</mat-label>
+          <input matInput formControlName="partition" type="number"/>
         </mat-form-field>
+
         <mat-form-field appearance="outline">
-          <mat-label>Position</mat-label>
-          <input matInput formControlName="offset"  />
+          <mat-label>📌 Posición</mat-label>
+          <input matInput formControlName="offset" type="number"/>
         </mat-form-field>
+
         <mat-form-field appearance="outline">
-          <mat-label>Value</mat-label>
-          <textarea matInput rows="8" formControlName="value"></textarea>
+          <mat-label>📝 Valor</mat-label>
+          <textarea matInput rows="6" formControlName="value" placeholder="Contenido del mensaje..."></textarea>
         </mat-form-field>
+
         <mat-form-field appearance="outline">
-          <mat-label>Identifier</mat-label>
-          <input matInput formControlName="key"  />
+          <mat-label>🔑 Identificador</mat-label>
+          <input matInput formControlName="key" placeholder="ID del mensaje"/>
         </mat-form-field>
 
         <div class="form-actions">
-          <button mat-raised-button color="primary" (click)="enviarDatos()">Confirm</button>
+          <button mat-raised-button color="primary" (click)="enviarDatos()">Confirmar</button>
+          <button mat-button (click)="onClose()">Cancelar</button>
         </div>
       </form>
     </mat-card>
-  </div>
+  </mat-dialog-content>
 </ng-template>

@@ -16,55 +16,72 @@
         <div class="header-content">
           <mat-card-title class="metrics-title">Metrics Overview</mat-card-title>
           <button mat-flat-button (click)="getMetrics()" class="refresh-btn">
-            Refresh
+            <mat-icon>refresh</mat-icon> Refresh
           </button>
         </div>
       </mat-card-header>
 
       <mat-card-content class="metrics-cards">
-        <mat-card class="metric-card" matTooltip="Total de conexiones creadas al broker">
+        <mat-card class="metric-card"
+          [ngClass]="getMetricClass('connection-creation-total', metrics?.['connection-creation-total'])"
+          matTooltip="Total de conexiones creadas al broker">
           <div class="metric-name">Created Connections</div>
-          <div class="metric-value">{{ metrics?.['connection-creation-total'] || 0 }}</div>
+          <div class="metric-value">
+            {{ metrics?.['connection-creation-total'] | number }}
+          </div>
         </mat-card>
 
-        <mat-card class="metric-card" matTooltip="Total de conexiones cerradas al broker">
+        <mat-card class="metric-card"
+          [ngClass]="getMetricClass('connection-close-total', metrics?.['connection-close-total'])"
+          matTooltip="Total de conexiones cerradas al broker">
           <div class="metric-name">Closed Connections</div>
-          <div class="metric-value">{{ metrics?.['connection-close-total'] || 0 }}</div>
+          <div class="metric-value">
+            {{ metrics?.['connection-close-total'] | number }}
+          </div>
         </mat-card>
 
-        <mat-card class="metric-card" matTooltip="Número total de requests recibidos">
+        <mat-card class="metric-card" [ngClass]="getMetricClass('request-total', metrics?.['request-total'])"
+          matTooltip="Número total de requests recibidos">
           <div class="metric-name">Requests Total</div>
-          <div class="metric-value">{{ metrics?.['request-total'] || 0 }}</div>
+          <div class="metric-value">
+            {{ metrics?.['request-total'] | number }}
+          </div>
         </mat-card>
 
-        <mat-card class="metric-card" matTooltip="Total de bytes enviados/recibidos en la red">
+        <mat-card class="metric-card" [ngClass]="getMetricClass('network-io-total', metrics?.['network-io-total'])"
+          matTooltip="Total de bytes enviados/recibidos en la red">
           <div class="metric-name">Network IO Total</div>
-          <div class="metric-value">{{ metrics?.['network-io-total'] || 0  }}</div>
+          <div class="metric-value">
+            {{ metrics?.['network-io-total'] | number }}
+          </div>
         </mat-card>
 
-        <mat-card class="metric-card" matTooltip="Tiempo que el sistema estuvo esperando I/O">
+        <mat-card class="metric-card" [ngClass]="getMetricClass('io-wait-ratio', metrics?.['io-wait-ratio'])"
+          matTooltip="Tiempo que el sistema estuvo esperando I/O">
           <div class="metric-name">IO Wait Ratio</div>
-          <div class="metric-value">{{ metrics?.['io-wait-ratio'] || 0  }}</div>
+          <div class="metric-value">
+            {{ metrics?.['io-wait-ratio'] | percent:'1.0-2' }}
+          </div>
         </mat-card>
 
-        <mat-card class="metric-card" matTooltip="Requests por segundo">
+        <mat-card class="metric-card" [ngClass]="getMetricClass('request-rate', metrics?.['request-rate'])" matTooltip="Requests por segundo">
           <div class="metric-name">Request Rate</div>
-          <div class="metric-value">{{ metrics?.['request-rate'] || 0  }}</div>
+          <div class="metric-value">{{ metrics?.['request-rate'] | number }}</div>
         </mat-card>
 
-        <mat-card class="metric-card" matTooltip="Total de operaciones de selección (lecturas)">
+        <mat-card class="metric-card" [ngClass]="getMetricClass('select-total', metrics?.['select-total'])" matTooltip="Total de operaciones de selección (lecturas)">
           <div class="metric-name">Select Total</div>
-          <div class="metric-value">{{ metrics?.['select-total'] || 0  }}</div>
+          <div class="metric-value">{{ metrics?.['select-total'] || 0 }}</div>
         </mat-card>
 
-        <mat-card class="metric-card" matTooltip="Número actual de conexiones abiertas">
+        <mat-card class="metric-card" [ngClass]="getMetricClass('connection-count', metrics?.['connection-count'])" matTooltip="Número actual de conexiones abiertas">
           <div class="metric-name">Connection Count</div>
-          <div class="metric-value">{{ metrics?.['connection-count'] || 0  }}</div>
+          <div class="metric-value">{{ metrics?.['connection-count'] || 0 }}</div>
         </mat-card>
-
-        <mat-card class="metric-card" matTooltip="Bytes enviados desde el broker">
+ 
+        <mat-card class="metric-card" [ngClass]="getMetricClass('outgoing-byte-total', metrics?.['outgoing-byte-total'])" matTooltip="Bytes enviados desde el broker">
           <div class="metric-name">Outgoing Bytes</div>
-          <div class="metric-value">{{ metrics?.['outgoing-byte-total'] || 0  }}</div>
+          <div class="metric-value">{{ metrics?.['outgoing-byte-total'] || 0 }}</div>
         </mat-card>
       </mat-card-content>
     </mat-card>

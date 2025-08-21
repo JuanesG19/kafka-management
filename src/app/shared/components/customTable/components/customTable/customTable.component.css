@@ -37,6 +37,10 @@
   min-width: 0; /* Añade esta línea */
 }
 
+.mat-row:nth-child(even) {
+  background: #f9f9f9;
+}
+
 .valor-cell {
   display: block;
   width: 100%;

@@ -1,12 +1,25 @@
 <mat-drawer-container class="drawer-container" (mousemove)="onMouseMove($event)">
   <mat-drawer #drawer mode="side" class="drawer" (mouseleave)="drawer.close()">
-    <mat-toolbar class="drawer-header">
-      <div class="drawer-title">Menú</div>
-      <mat-icon class="drawer-close" (click)="drawer.close()" (keydown.enter)="drawer.close()">
-        close
-      </mat-icon>
-    </mat-toolbar>
+    <mat-toolbar class="drawer-header !p-0 !min-h-0">
+      <div class="w-[95%] mx-auto bg-[linear-gradient(90deg,_#0477ba,_#0e4174)] 
+         text-white rounded-[8px] flex items-center px-3 py-2 min-h-[72px] mt-[20px]">
+        <mat-icon class="h-[50px] w-[50px] text-[20px] mr-[10px] text-white material-icons">
+          account_box
+        </mat-icon>
 
+        <div class="flex flex-col leading-none">
+          <span class="text-sm font-semibold">Bienvenido</span>
+          <span class="text-xs">Hola</span>
+        </div>
+
+        <div class="ml-auto">
+          <mat-icon class="h-[28px] w-[28px] text-[2
+          4px] cursor-pointer text-white material-icons" (click)="logout()">
+            logout
+          </mat-icon>
+        </div>
+      </div>
+    </mat-toolbar>
     <mat-list class="drawer-content">
       @for(item of menuItems; track item) {
       <mat-list-item class="drawer-link" [routerLink]="item.route" routerLinkActive="active-link"
@@ -17,10 +30,9 @@
       }
     </mat-list>
 
-    <div class="drawer-logout">
-      <button mat-raised-button color="warn" (click)="logout()">Logout</button>
-    </div>
   </mat-drawer>
+
+
 
   <mat-drawer-content class="main-content">
     <app-navbar (toggleDrawer)="drawer.toggle()"></app-navbar>

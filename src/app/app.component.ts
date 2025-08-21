@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { LoginComponent } from './shared/components/login/components/login/login.component';
 import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { BrokersService } from './brokers/application/services/brokers.service';
 import { filter } from 'rxjs';
@@ -9,7 +8,7 @@ import { filter } from 'rxjs';
   standalone: true,
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
-  imports: [RouterOutlet, LoginComponent]
+  imports: [RouterOutlet]
 })
 export class AppComponent implements OnInit {
   title = 'angular-electron';
@@ -20,7 +19,7 @@ export class AppComponent implements OnInit {
     this.router.events
       .pipe(filter(event => event instanceof NavigationEnd))
       .subscribe((event: NavigationEnd) => {
-        const url = event.urlAfterRedirects; // ruta final
+        const url = event.urlAfterRedirects; 
         if (!url.includes('/login')) {
           this.brokerCheckService.checkBroker();
         }

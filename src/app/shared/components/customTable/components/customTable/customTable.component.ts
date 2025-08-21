@@ -57,7 +57,7 @@ export class CustomTableComponent implements OnInit, AfterViewInit {
   @Output() pageChange = new EventEmitter<PageEvent>();
 
   onPageChange(event: PageEvent) {
-    console.log('Página cambiada', event); // Debug para asegurarte de que el evento se dispara
+    console.log('Página cambiada', event);
     this.pageChange.emit(event);
   }
 
@@ -76,7 +76,6 @@ export class CustomTableComponent implements OnInit, AfterViewInit {
   }
   this.dataSource.data = this.data;
 
-  console.log(this.dataSource.data)
     this.dataSource.filterPredicate = (data: any, filter: string) => {
       const dataStr = Object.values(data).join(' ').toLowerCase();
       return dataStr.includes(filter);

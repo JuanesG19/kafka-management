@@ -1,10 +1,10 @@
 <div class="bg-white table-container flex flex-col">
-  <div class="flex-1 flex justify-between bg-primary rounded-t-lg pt-4">
-    <div class="flex-1 flex ml-5 pt-4">
+  <div class="flex-1 flex justify-between bg-primary rounded-t-lg pt-5 pb-5">
+    <div class="flex-1 flex ml-5">
       <div class="text-2xl font-semibold text-white">{{ columnName }}</div>
     </div>
 
-    <div class="flex mr-5 h-full items-center">
+    <!--<div class="flex mr-5 h-full items-center">
       <mat-form-field class="h-full flex items-center">
         <mat-label>Search</mat-label>
         <input
@@ -13,7 +13,7 @@
           placeholder="Buscar en la tabla"
         />
       </mat-form-field>
-    </div>
+    </div>-->
   </div>
 
   <mat-table [dataSource]="dataSource" matSort class="custom-table">
@@ -26,13 +26,12 @@
       </mat-cell>
     </ng-container>
 
-    <!-- Columna de acciones -->
     @if(actions && actions.length > 0){<ng-container matColumnDef="actions">
       <mat-header-cell *matHeaderCellDef class="text-center">
         actions
       </mat-header-cell>
       <mat-cell *matCellDef="let element" class="text-center">
-        <ng-container *ngFor="let action of actions">
+        @for(action of actions; track action) {
           <button
             mat-icon-button
             [attr.aria-label]="action.label"
@@ -41,7 +40,7 @@
           >
             <mat-icon>{{ action.icon }}</mat-icon>
           </button>
-        </ng-container>
+        }
       </mat-cell>
     </ng-container>}
 
