@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { BrokersService } from './brokers/application/services/brokers.service';
 import { filter } from 'rxjs';
+import { InactivityService } from './shared/inactivity/services/inactivity.service';
 
 @Component({
   selector: 'app-root',
@@ -13,7 +14,9 @@ import { filter } from 'rxjs';
 export class AppComponent implements OnInit {
   title = 'angular-electron';
 
-  constructor(private readonly brokerCheckService: BrokersService, private readonly router: Router) { }
+  constructor(private readonly brokerCheckService: BrokersService, private readonly router: Router, private inactivityService: InactivityService,) { 
+    this.inactivityService.startTimer();
+  }
 
   ngOnInit() {
     this.router.events
