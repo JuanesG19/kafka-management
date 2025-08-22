@@ -1,6 +1,8 @@
 import { Injectable, NgZone } from '@angular/core';
 import { BehaviorSubject, Observable, timer, Subscription } from 'rxjs';
 import { environment } from '../../../../environments/environment';
+import { MatDialog } from '@angular/material/dialog';
+import { CustomModalComponent } from '../../components/customModal/components/customModal/customModal.component';
 
 @Injectable({
   providedIn: 'root',
@@ -12,7 +14,8 @@ export class InactivityService {
   private timerSubscription: Subscription | undefined;
 
   constructor(
-    private readonly ngZone: NgZone
+    private readonly ngZone: NgZone,
+    private dialog: MatDialog
   ) {
     this.ngZone.runOutsideAngular(() => {
       window.addEventListener('mousemove', this.resetTimer.bind(this));
@@ -31,9 +34,15 @@ export class InactivityService {
       this.ngZone.run(() => {
         this.inactivity.next(true);
         this.deleteUserData();
-        alert('Has estado inactivo por un tiempo prolongado. Por favor, inicia sesión nuevamente.');
-        this.redirectUrl(environment.url.domain);
-        
+        this.dialog.open(CustomModalComponent, {
+          data: {
+            title: 'Aviso Importante',
+            message: 'Tiempo de inactividad excedido. Por favor, vuelve a iniciar sesión.',
+          },
+          disableClose: true
+        }).afterClosed().subscribe(() => {
+          this.redirectUrl('/login');
+        });;
       });
     });
   }

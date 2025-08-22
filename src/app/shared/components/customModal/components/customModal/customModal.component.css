@@ -1,0 +1,13 @@
+.dialog-header {
+  background-color: #0E4174;
+  /* azul que mencionaste */
+  color: white;
+}
+
+mat-dialog-content p{
+  padding: 20px 16px; /* separación superior e inferior más uniforme */
+}
+
+mat-dialog-actions button{
+  background-color: #0E4174;
+}
