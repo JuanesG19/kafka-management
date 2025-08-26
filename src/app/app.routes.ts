@@ -21,13 +21,13 @@ export const routes: Routes = [
       {
         path: 'topics', component: TopicsComponent,
       },
-      {path: 'topics/:consumer', component: TopicsComponent},
+      { path: 'topics/:consumer', component: TopicsComponent },
       { path: 'brokers', component: BrokersComponent },
       {
         path: 'partitions', component: PartitionsComponent,
       },
       {
-        path: 'partitions/:topic',component: PartitionsComponent,
+        path: 'partitions/:topic', component: PartitionsComponent,
       },
       { path: '**', redirectTo: 'home' },
     ],

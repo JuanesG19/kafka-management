@@ -1,67 +1,46 @@
-.dialog-container {
-  font-family: 'Roboto', sans-serif;
-  background: #fff;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.15);
-}
-
 .dialog-header {
-  background: linear-gradient(135deg, #0E4174 0%, #0477BA 100%);
-  color: #fff;
-  padding: 16px 20px;
-  text-align: center;
-}
-
-.dialog-header h2 {
+  background-color: #0E4174;
+  color: white;
   margin: 0;
-  font-size: 1.4rem;
-  font-weight: 500;
+  font-size: 1.2rem;
+  font-weight: 600;
 }
 
-.dialog-content {
-  padding: 20px;
+mat-dialog-content {
+  padding: 20px 16px;
 }
 
-mat-form-field {
-  width: 100%;
+mat-dialog-actions button {
+  background-color: #0E4174;
+  color: white;
 }
 
-.error-message {
-  color: #f44336;
-  font-size: 0.85em;
+.error-card {
+  margin-top: 20px !important;
+  padding: 16px 20px !important;
+  background: linear-gradient(135deg, #ffebee, #ffcdd2) !important;
+  border-left: 4px solid #f44336 !important;
+  border-radius: 12px !important;
+  color: #c62828 !important;
+  display: flex !important;
+  align-items: center !important;
+  box-shadow: 0 4px 12px rgba(244, 67, 54, 0.2) !important;
+  animation: errorSlide 0.3s ease-out;
 }
 
-mat-dialog-actions {
-  display: flex;
-  justify-content: flex-end;
-  padding: 16px 20px;
+.error-card mat-icon {
+  margin-right: 12px !important;
+  color: #f44336 !important;
 }
 
-.validate-button {
-  background: linear-gradient(135deg, #0E4174 0%, #0477BA 100%);
-  color: #fff !important;
-  font-weight: 500;
-  min-width: 120px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  transition: all 0.2s;
-}
+@keyframes errorSlide {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
 
-.validate-button:hover:not(:disabled) {
-  background: linear-gradient(135deg, #0477BA 0%, #0E4174 100%);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-}
-
-.validate-button:disabled {
-  background: rgba(14,65,116,0.4);
-  color: rgba(255,255,255,0.7) !important;
-  cursor: not-allowed;
-}
-
-mat-spinner {
-  margin: 0 auto;
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

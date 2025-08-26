@@ -15,10 +15,8 @@ export class AuthKeycloackService {
         const userData: string = sessionData.username;
         const userPassword: string = sessionData.password;
 
-        // Limpio token viejo
         localStorage.removeItem(environment.keycloack.localStorageToken);
 
-        // Devuelvo el observable que emite el token
         return this.authKeycloackHttpService
             .getKeycloakToken(userData, userPassword)
             .pipe(
@@ -36,6 +34,10 @@ export class AuthKeycloackService {
 
     logout(): void {
         localStorage.removeItem(environment.keycloack.localStorageToken);
+    }
+
+    isAuthenticated(): boolean {
+        return localStorage.getItem('isLoggedIn') === 'true';
     }
 
 }

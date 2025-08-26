@@ -10,7 +10,7 @@ import { environment } from '../../../environments/environment';
 })
 export class ConsumerHttpService {
   private readonly http = inject(HttpClient);
-  private readonly url: string = `${environment.url.domain}/platform-kafka-admin/kafka`;
+  private readonly url: string = `${environment.url.kafkaBackendDomain}/platform-kafka-admin/kafka`;
 
   constructor() {}
 

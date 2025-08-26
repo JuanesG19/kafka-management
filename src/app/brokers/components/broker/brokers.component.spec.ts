@@ -49,11 +49,11 @@ describe('BrokersComponent', () => {
   });
 
   it('should initialize the form with the correct fields and validations', () => {
-    expect(component.dialogForm.controls['code'].validator).toEqual(Validators.required);
+    expect(component.brokerForm.controls['code'].validator).toEqual(Validators.required);
   });
 
   it('should not submit invalid form', () => {
-    component.dialogForm.controls['code'].setValue('');
+    component.brokerForm.controls['code'].setValue('');
     component.onSubmit();
     expect(mockBrokersService.selectBroker).not.toHaveBeenCalled();
   });
@@ -66,7 +66,7 @@ describe('BrokersComponent', () => {
     const localStorageSpy = jest.spyOn(Storage.prototype, 'setItem');
 
     // Setup form and service mock
-    component.dialogForm.controls['code'].setValue(mockCode);
+    component.brokerForm.controls['code'].setValue(mockCode);
     mockBrokersService.selectBroker.mockReturnValue(of(mockResponse));
 
     // Trigger submit
@@ -92,7 +92,7 @@ describe('BrokersComponent', () => {
     const consoleLogSpy = jest.spyOn(console, 'log').mockImplementation();
 
     // Setup form and service mock
-    component.dialogForm.controls['code'].setValue(mockCode);
+    component.brokerForm.controls['code'].setValue(mockCode);
     mockBrokersService.selectBroker.mockReturnValue(throwError(() => new Error('Test Error')));
 
     // Trigger submit
@@ -112,7 +112,7 @@ describe('BrokersComponent', () => {
     const mockCode = 'TEST123';
 
     // Setup form and service mock
-    component.dialogForm.controls['code'].setValue(mockCode);
+    component.brokerForm.controls['code'].setValue(mockCode);
     mockBrokersService.selectBroker.mockReturnValue(of({ id: 1, name: 'Test Broker' }));
 
     // Trigger submit
@@ -126,7 +126,7 @@ describe('BrokersComponent', () => {
     const mockCode = 'TEST123';
 
     // Setup form and service mock
-    component.dialogForm.controls['code'].setValue(mockCode);
+    component.brokerForm.controls['code'].setValue(mockCode);
     mockBrokersService.selectBroker.mockReturnValue(of({ id: 1, name: 'Test Broker' }));
 
     // Trigger submit
@@ -143,7 +143,7 @@ describe('BrokersComponent', () => {
     const mockCode = 'TEST123';
 
     // Setup form and service mock
-    component.dialogForm.controls['code'].setValue(mockCode);
+    component.brokerForm.controls['code'].setValue(mockCode);
     mockBrokersService.selectBroker.mockReturnValue(throwError(() => new Error('Test Error')));
 
     // Trigger submit

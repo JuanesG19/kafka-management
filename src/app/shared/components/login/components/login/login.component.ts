@@ -50,7 +50,7 @@ export class LoginComponent {
 
     const { username, password } = this.loginForm.value;
 
-    console.log('Intentando iniciar sesión con:', username, password);
+    console.log('You are trying to sign in with: ', username, password);
 
     try {
       // Espera a que llegue el token
@@ -58,14 +58,14 @@ export class LoginComponent {
         this.authService.getKeycloakTokenService({ username, password } as ISession)
       );
 
-      console.log('Token recibido de Keycloak:', token);
+      console.log('Received keycloack token: ', token);
       localStorage.setItem('isLoggedIn', 'true');
       this.router.navigate(['/home']);
       this.errorMessage = null;
 
     } catch (err) {
       console.error(err);
-      this.errorMessage = 'Usuario o contraseña incorrectos';
+      this.errorMessage = 'User or password invalid';
     }
   }
 }

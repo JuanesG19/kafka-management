@@ -3,6 +3,38 @@
 html,
 body {
   height: 100%;
+  
+}
+
+.toast-top-center {
+  top: 12px !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  position: fixed !important;   /* 👈 importante */
+  z-index: 9999 !important;     /* 👈 encima del footer */
+}
+
+.toast-container .ngx-toastr {
+  color: white !important;
+  border-radius: 12px !important;
+  padding: 16px !important;
+  font-size: 16px !important;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3) !important;
+}
+
+.toast-container .toast-title {
+  font-weight: bold;
+  font-size: 18px;
+}
+
+/* 🚨 Estilo solo para errores */
+.toast-container .toast-error {
+  background: linear-gradient(to right, #e53935, #b71c1c) !important;
+  color: #fff !important;
+}
+
+.toast-container .toast-message {
+  font-size: 15px;
 }
 
 body {

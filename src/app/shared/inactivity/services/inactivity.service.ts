@@ -26,25 +26,28 @@ export class InactivityService {
   }
 
   startTimer() {
-    if (this.timerSubscription) {
-      this.timerSubscription.unsubscribe();
-    }
+    if (localStorage.getItem(environment.keycloack.localStorageToken) != null) {
 
-    this.timerSubscription = timer(this.inactivityTime).subscribe(() => {
-      this.ngZone.run(() => {
-        this.inactivity.next(true);
-        this.deleteUserData();
-        this.dialog.open(CustomModalComponent, {
-          data: {
-            title: 'Aviso Importante',
-            message: 'Tiempo de inactividad excedido. Por favor, vuelve a iniciar sesión.',
-          },
-          disableClose: true
-        }).afterClosed().subscribe(() => {
-          this.redirectUrl('/login');
-        });;
+      if (this.timerSubscription) {
+        this.timerSubscription.unsubscribe();
+      }
+
+      this.timerSubscription = timer(this.inactivityTime).subscribe(() => {
+        this.ngZone.run(() => {
+          this.inactivity.next(true);
+          this.deleteUserData();
+          this.dialog.open(CustomModalComponent, {
+            data: {
+              title: 'Aviso Importante',
+              message: 'Tiempo de inactividad excedido. Por favor, vuelve a iniciar sesión.',
+            },
+            disableClose: true
+          }).afterClosed().subscribe(() => {
+            this.redirectUrl('/login');
+          });;
+        });
       });
-    });
+    }
   }
 
   resetTimer() {

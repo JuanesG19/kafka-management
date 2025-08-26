@@ -14,7 +14,7 @@ export class AuthKeycloackHttpService {
     user: string,
     pass: string
   ): Observable<ITokenKeycloackResponse> {
-    const url = `${environment.url.famiDomain}/realms/famisanar/protocol/openid-connect/token`;
+    const url = `${environment.url.keycloackDomain}/realms/famisanar/protocol/openid-connect/token`;
 
     const body = new HttpParams()
       .set('client_id', environment.keycloack.clientIdKeycloack)

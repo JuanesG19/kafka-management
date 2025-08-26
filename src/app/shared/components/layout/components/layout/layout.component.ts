@@ -8,11 +8,13 @@ import { NavbarComponent } from '../../../home/components/navbar/navbar.componen
 import { FooterComponent } from '../../../home/components/footer/footer.component';
 import { MatListModule } from '@angular/material/list';
 import { AuthKeycloackService } from '../../../../auth/application/services/auth-keycloack.service';
+import { MatDialog } from '@angular/material/dialog';
+import { BrokersComponent } from '../../../../../brokers/components/broker/brokers.component';
 
 interface MenuItem {
   icon: string;
   label: string;
-  route: string;
+  route?: string;
   action?: () => void;
   disabled?: boolean;
   children?: MenuItem[];
@@ -64,18 +66,11 @@ export class LayoutComponent {
     {
       icon: 'dns',
       label: 'Change Broker',
-      route: '/home',
-      action: () => this.changeBroker()
+      action: () => this.openBrokerDialog()
     }
   ];
 
-  constructor(private readonly router: Router, private readonly authService: AuthKeycloackService) { }
-
-  changeBroker() {
-    localStorage.removeItem("broker");
-    this.router.navigate(['/home']);
-    location.reload();
-  }
+  constructor(private readonly router: Router, private readonly authService: AuthKeycloackService, private readonly dialog: MatDialog) { }
 
   logout() {
     console.log('Cerrando sesión...');
@@ -91,5 +86,19 @@ export class LayoutComponent {
         this.drawer.open();
       }
     }
+  }
+
+  openBrokerDialog(): void {
+    const dialogRef = this.dialog.open(BrokersComponent, {
+      width: '420px',
+      disableClose: false
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result?.success) {
+        console.log('Broker cambiado con éxito:', result.code);
+        // aquí podrías refrescar la vista o recargar datos
+      }
+    });
   }
 }
