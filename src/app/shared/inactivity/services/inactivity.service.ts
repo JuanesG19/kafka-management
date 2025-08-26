@@ -11,7 +11,7 @@ export class InactivityService {
   public inactivityTime: number = environment.keycloack.inactivityTime;
   public inactivity = new BehaviorSubject<boolean>(false);
 
-  private timerSubscription: Subscription | undefined;
+  private timerSubscription: Subscription | null = null;
 
   constructor(
     private readonly ngZone: NgZone,
@@ -26,33 +26,49 @@ export class InactivityService {
   }
 
   startTimer() {
-    if (localStorage.getItem(environment.keycloack.localStorageToken) != null) {
+    if (!localStorage.getItem(environment.keycloack.localStorageToken)) {
+      return;
+    }
 
-      if (this.timerSubscription) {
-        this.timerSubscription.unsubscribe();
-      }
+    this.stopTimer(); 
 
-      this.timerSubscription = timer(this.inactivityTime).subscribe(() => {
-        this.ngZone.run(() => {
-          this.inactivity.next(true);
-          this.deleteUserData();
-          this.dialog.open(CustomModalComponent, {
-            data: {
-              title: 'Aviso Importante',
-              message: 'Tiempo de inactividad excedido. Por favor, vuelve a iniciar sesión.',
-            },
-            disableClose: true
-          }).afterClosed().subscribe(() => {
-            this.redirectUrl('/login');
-          });;
+    this.ngZone.runOutsideAngular(() => {
+      window.addEventListener('mousemove', this.resetTimer);
+      window.addEventListener('keypress', this.resetTimer);
+    });
+
+    this.timerSubscription = timer(this.inactivityTime).subscribe(() => {
+      this.ngZone.run(() => {
+        this.inactivity.next(true);
+        this.deleteUserData();
+
+        this.dialog.open(CustomModalComponent, {
+          data: {
+            title: 'Important Warning',
+            message: 'Inactivity timeout. Please log in again.',
+          },
+          disableClose: true,
+        }).afterClosed().subscribe(() => {
+          this.redirectUrl('/login');
         });
       });
-    }
+    });
   }
 
-  resetTimer() {
+
+  resetTimer = () => {
     this.inactivity.next(false);
     this.startTimer();
+  };
+
+  stopTimer() {
+    if (this.timerSubscription) {
+      this.timerSubscription.unsubscribe();
+      this.timerSubscription = null;
+    }
+
+    window.removeEventListener('mousemove', this.resetTimer);
+    window.removeEventListener('keypress', this.resetTimer);
   }
 
   isActive(): Observable<boolean> {

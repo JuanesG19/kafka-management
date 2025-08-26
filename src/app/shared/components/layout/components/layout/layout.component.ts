@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
@@ -38,7 +38,7 @@ interface MenuItem {
     MatListModule,
   ]
 })
-export class LayoutComponent {
+export class LayoutComponent implements OnInit {
   @ViewChild('drawer') drawer!: MatDrawer;
 
 
@@ -69,6 +69,14 @@ export class LayoutComponent {
       action: () => this.openBrokerDialog()
     }
   ];
+  userName: string = '';
+  userEmail: string = '';
+
+  ngOnInit(): void {
+    this.userName = this.authService.getUserName();
+    this.userEmail = this.authService.getEmail();
+  }
+
 
   constructor(private readonly router: Router, private readonly authService: AuthKeycloackService, private readonly dialog: MatDialog) { }
 

@@ -10,7 +10,7 @@ export class AuthGuard implements CanActivate {
   constructor(private readonly router: Router, private readonly authService: AuthKeycloackService) {}
 
   canActivate(): boolean {
-    if (!this.authService.isAuthenticated()) {
+    if (!this.authService.isLoggedIn()) {
       alert('Debes estar loggeado para realizar esta accion');
       this.router.navigate(['/']);
       return false;

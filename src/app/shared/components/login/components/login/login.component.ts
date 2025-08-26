@@ -49,22 +49,14 @@ export class LoginComponent {
     if (!this.loginForm.valid) return;
 
     const { username, password } = this.loginForm.value;
-
-    console.log('You are trying to sign in with: ', username, password);
-
     try {
-      // Espera a que llegue el token
       const token = await firstValueFrom(
         this.authService.getKeycloakTokenService({ username, password } as ISession)
       );
-
-      console.log('Received keycloack token: ', token);
-      localStorage.setItem('isLoggedIn', 'true');
       this.router.navigate(['/home']);
       this.errorMessage = null;
 
     } catch (err) {
-      console.error(err);
       this.errorMessage = 'User or password invalid';
     }
   }

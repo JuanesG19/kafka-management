@@ -3,13 +3,13 @@
     <mat-toolbar class="drawer-header !p-0 !min-h-0">
       <div class="w-[95%] mx-auto bg-[linear-gradient(90deg,_#0477ba,_#0e4174)] 
          text-white rounded-[8px] flex items-center px-3 py-2 min-h-[72px] mt-[20px]">
-        <mat-icon class="h-[50px] w-[50px] text-[20px] mr-[10px] text-white material-icons">
+        <mat-icon class="h-[50px] w-[50px] text-[15px] mr-[10px] text-white material-icons">
           account_box
         </mat-icon>
 
         <div class="flex flex-col leading-none">
-          <span class="text-sm font-semibold">Bienvenido</span>
-          <span class="text-xs">Hola</span>
+          <span class="text-sm font-semibold">{{userName}}</span>
+          <span class="text-xs">{{userEmail}}</span>
         </div>
 
         <div class="ml-auto">
