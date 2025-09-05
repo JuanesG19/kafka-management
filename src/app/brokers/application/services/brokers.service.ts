@@ -11,7 +11,7 @@ export class BrokersService {
   constructor(
     private readonly brokersHttpService: BrokersHttpService,
     private readonly dialog: MatDialog
-  ) {}
+  ) { }
 
   selectBroker(term: string): Observable<string> {
     return this.brokersHttpService.selectBroker(term);

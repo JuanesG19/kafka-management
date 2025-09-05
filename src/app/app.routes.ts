@@ -1,15 +1,14 @@
-import { AuthGuard } from './shared/auth/application/guard/AuthGuard';
+import { AuthGuard } from './shared/auth/application/guard/auth-guard';
 import { BrokersComponent } from './brokers/components/broker/brokers.component';
 import { ConsumersComponent } from './consumers/components/consumers/consumers.component';
 import { DashboardComponent } from './dashboard/components/dashboard/dashboard.component';
 import { LayoutComponent } from './shared/components/layout/components/layout/layout.component';
-import { LoginComponent } from './shared/components/login/components/login/login.component';
+import { LoginComponent } from './shared/components/login/components/login.component';
 import { PartitionsComponent } from './partitions/components/partition/partitions.component';
 import { Routes } from '@angular/router';
 import { TopicsComponent } from './topics/components/topic/topics.component';
 
 export const routes: Routes = [
-  { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   {
     path: '',
@@ -18,18 +17,13 @@ export const routes: Routes = [
     children: [
       { path: 'home', component: DashboardComponent },
       { path: 'consumers', component: ConsumersComponent },
-      {
-        path: 'topics', component: TopicsComponent,
-      },
+      { path: 'topics', component: TopicsComponent },
       { path: 'topics/:consumer', component: TopicsComponent },
       { path: 'brokers', component: BrokersComponent },
-      {
-        path: 'partitions', component: PartitionsComponent,
-      },
-      {
-        path: 'partitions/:topic', component: PartitionsComponent,
-      },
+      { path: 'partitions', component: PartitionsComponent },
+      { path: 'partitions/:topic', component: PartitionsComponent },
       { path: '**', redirectTo: 'home' },
     ],
   },
+  { path: '**', redirectTo: 'home' },
 ];

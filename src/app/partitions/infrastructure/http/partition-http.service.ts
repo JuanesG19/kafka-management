@@ -10,7 +10,7 @@ import { IPartition } from '../../../shared/domains/IPartition';
 })
 export class PartitionsHttpService {
   private readonly http = inject(HttpClient);
-  private readonly url: string = `${environment.url.kafkaBackendDomain}/platform-kafka-admin/kafka`;
+  private readonly url: string = `${environment.url.kafkaBackendDomain}/operating-platform/kafka`;
 
   getPartitions(term : string):Observable<IPartition[]>{
     const url = `${this.url}/topics/${term}/partitions/details/byTopic`;

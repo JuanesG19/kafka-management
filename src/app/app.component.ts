@@ -4,6 +4,7 @@ import { toSignal } from '@angular/core/rxjs-interop';
 import { InactivityService } from './shared/inactivity/services/inactivity.service';
 import { BrokerMonitorService } from './brokers/components/broker/brokermonitor.service';
 import { filter, map, startWith } from 'rxjs';
+import { AuthKeycloackService } from './shared/auth/application/services/auth-ws02.service';
 
 @Component({
   selector: 'app-root',
@@ -19,12 +20,18 @@ export class AppComponent {
     this.router.events.pipe(
       filter((e): e is NavigationEnd => e instanceof NavigationEnd),
       map((e) => e.urlAfterRedirects),
-      startWith(this.router.url) 
+      startWith(this.router.url)
     ),
     { initialValue: this.router.url }
   );
 
-  constructor(private readonly router: Router, private inactivityService: InactivityService, private brokerMonitor: BrokerMonitorService) {
+  constructor(private readonly router: Router,
+    private inactivityService: InactivityService,
+    private brokerMonitor: BrokerMonitorService,
+    private authService: AuthKeycloackService) {
+    if (this.authService.isLoggedIn() && this.router.url === '/login') {
+      this.router.navigate(['/home']);
+    }
     effect(() => {
       const url = this.currentUrl();
       const isLogin = url.includes('/login');

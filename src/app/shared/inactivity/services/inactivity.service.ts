@@ -8,7 +8,7 @@ import { CustomModalComponent } from '../../components/customModal/components/cu
   providedIn: 'root',
 })
 export class InactivityService {
-  public inactivityTime: number = environment.keycloack.inactivityTime;
+  public inactivityTime: number = environment.famiWS02.inactivityTime;
   public inactivity = new BehaviorSubject<boolean>(false);
 
   private timerSubscription: Subscription | null = null;
@@ -26,7 +26,7 @@ export class InactivityService {
   }
 
   startTimer() {
-    if (!localStorage.getItem(environment.keycloack.localStorageToken)) {
+    if (!localStorage.getItem(environment.famiWS02.localStorageToken)) {
       return;
     }
 
@@ -80,6 +80,6 @@ export class InactivityService {
   }
 
   deleteUserData() {
-    localStorage.removeItem(environment.keycloack.localStorageToken);
+    localStorage.removeItem(environment.famiWS02.localStorageToken);
   }
 }

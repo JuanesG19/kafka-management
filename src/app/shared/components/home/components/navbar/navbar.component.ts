@@ -9,7 +9,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { Router } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
-import { AuthKeycloackService } from '../../../../auth/application/services/auth-keycloack.service';
+import { AuthKeycloackService } from '../../../../auth/application/services/auth-ws02.service';
+import { AuthSyncService } from '../../../../auth/application/guard/auth-sync.service';
 
 @Component({
   selector: 'app-navbar',
@@ -28,13 +29,14 @@ import { AuthKeycloackService } from '../../../../auth/application/services/auth
   ]
 })
 export class NavbarComponent {
-  constructor(private readonly router: Router, private readonly authService: AuthKeycloackService) { }
+  constructor(private readonly router: Router, private readonly authService: AuthKeycloackService, private readonly authSync: AuthSyncService) { }
 
   @Output() toggleDrawer = new EventEmitter<void>();
 
   logout() {
     console.log('Cerrando sesión...');
     this.router.navigate(['']);
+    this.authSync.announceLogout();
     this.authService.logout();
   }
 }

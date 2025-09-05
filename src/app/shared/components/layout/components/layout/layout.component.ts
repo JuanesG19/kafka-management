@@ -7,9 +7,10 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { NavbarComponent } from '../../../home/components/navbar/navbar.component';
 import { FooterComponent } from '../../../home/components/footer/footer.component';
 import { MatListModule } from '@angular/material/list';
-import { AuthKeycloackService } from '../../../../auth/application/services/auth-keycloack.service';
+import { AuthKeycloackService } from '../../../../auth/application/services/auth-ws02.service';
 import { MatDialog } from '@angular/material/dialog';
 import { BrokersComponent } from '../../../../../brokers/components/broker/brokers.component';
+import { AuthSyncService } from '../../../../auth/application/guard/auth-sync.service';
 
 interface MenuItem {
   icon: string;
@@ -78,12 +79,13 @@ export class LayoutComponent implements OnInit {
   }
 
 
-  constructor(private readonly router: Router, private readonly authService: AuthKeycloackService, private readonly dialog: MatDialog) { }
+  constructor(private readonly router: Router, private readonly authService: AuthKeycloackService, private readonly dialog: MatDialog, private readonly authSync: AuthSyncService) { }
 
   logout() {
     console.log('Cerrando sesión...');
     this.router.navigate(['']);
     this.authService.logout();
+    this.authSync.announceLogout();
   }
 
   onMouseMove(event: MouseEvent): void {

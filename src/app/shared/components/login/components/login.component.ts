@@ -10,8 +10,8 @@ import {
   FormBuilder,
 } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthKeycloackService } from '../../../../auth/application/services/auth-keycloack.service';
-import { ISession } from '../../../../auth/domain/ISession';
+import { AuthKeycloackService } from '../../../auth/application/services/auth-ws02.service';
+import { ISession } from '../../../auth/domain/ISession';
 import { firstValueFrom } from 'rxjs';
 
 

@@ -10,7 +10,7 @@ import { IMessage } from '../../../shared/domains/IMessage';
 })
 export class MessageHttpService {
   private readonly http = inject(HttpClient);
-  private readonly url: string = `${environment.url.kafkaBackendDomain}/platform-kafka-admin/kafka`;
+  private readonly url: string = `${environment.url.kafkaBackendDomain}/operating-platform/kafka`;
 
   /* TODO -> Hay que tiparlo cuando se defina el objeto */
   retryMessage(message: any): Observable<any>{

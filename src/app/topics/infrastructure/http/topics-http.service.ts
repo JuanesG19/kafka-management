@@ -11,7 +11,7 @@ import { IMessage } from '../../../shared/domains/IMessage';
 })
 export class TopicsHttpService {
   private readonly http = inject(HttpClient);
-  private readonly url: string = `${environment.url.kafkaBackendDomain}/platform-kafka-admin/kafka`;
+  private readonly url: string = `${environment.url.kafkaBackendDomain}/operating-platform/kafka`;
 
   getTopics(): Observable<ITopic[]> {
     const url = `${this.url}/topics`;

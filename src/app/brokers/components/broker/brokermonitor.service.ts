@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core"
-import { ToastrService } from "ngx-toastr"
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Injectable({
   providedIn: "root",
@@ -7,17 +7,17 @@ import { ToastrService } from "ngx-toastr"
 export class BrokerMonitorService {
   private intervalId: ReturnType<typeof setInterval> | null = null;
 
-  constructor(private toastr: ToastrService) {}
+  constructor(private readonly _snackBar: MatSnackBar) { }
 
   startMonitoring(): void {
     if (this.intervalId) return
 
     this.intervalId = setInterval(() => {
-      const broker = localStorage.getItem("broker")
+      const broker = localStorage.getItem("broker");
       if (!broker) {
         this.showBrokerError()
       }
-    }, 5000)
+    }, 2000)
   }
 
   stopMonitoring(): void {
@@ -28,11 +28,14 @@ export class BrokerMonitorService {
   }
 
   private showBrokerError(): void {
-    this.toastr.error("You are not connected to any broker", "Connection Error", {
-      timeOut: 10000,
-      closeButton: true,
-      progressBar: true,
-      positionClass: "toast-top-center",
-    })
+    this._snackBar.open(
+      "You are not connected to any broker",
+      "Ok",
+      {
+        duration: 5000,
+        panelClass: ['snackbar-error'],
+        horizontalPosition: 'center',
+      }
+    );
   }
 }

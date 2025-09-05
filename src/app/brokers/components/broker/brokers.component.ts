@@ -8,6 +8,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatCardModule } from '@angular/material/card';
 import { BrokersService } from '../../application/services/brokers.service';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 
 
 @Component({
@@ -24,6 +25,7 @@ import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
     MatProgressSpinnerModule,
     MatCardModule,
     MatDialogModule,
+    MatSnackBarModule,
   ]
 })
 export class BrokersComponent {
@@ -38,9 +40,10 @@ export class BrokersComponent {
   constructor(
     private readonly fb: FormBuilder,
     private readonly brokerService: BrokersService,
-    private dialogRef: MatDialogRef<BrokersComponent> 
+    private dialogRef: MatDialogRef<BrokersComponent>,
+    private readonly _snackBar: MatSnackBar
   ) {
-   }
+  }
 
   onSubmit(): void {
     if (this.brokerForm.valid) {
@@ -57,9 +60,17 @@ export class BrokersComponent {
             this.errorMessage.set('Error, try again');
           } else {
             localStorage.setItem('broker', code);
-            console.log('Broker conectado con éxito', res);
-            this.dialogRef.close(code); 
-          
+            this._snackBar.open(
+              'Connected to broker ' + code,
+              "Close",
+              {
+                duration: 5000,
+                panelClass: ['snackbar-success'],
+                horizontalPosition: 'center',
+                verticalPosition: 'bottom'
+              }
+            );
+            this.dialogRef.close({ success: true, code });
           }
 
           this.isLoading.set(false);

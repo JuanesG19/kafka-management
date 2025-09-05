@@ -9,24 +9,29 @@ import { ITokenKeycloackResponse } from '../../domain/IToken';
 })
 export class AuthKeycloackHttpService {
   private readonly http = inject(HttpClient);
+  private readonly url = `${environment.url.famiWS02}`;
 
-  getKeycloakToken(
+
+  getWs02Token(
     user: string,
     pass: string
-  ): Observable<ITokenKeycloackResponse> {
-    const url = `${environment.url.keycloackDomain}/realms/famisanar/protocol/openid-connect/token`;
-
-    const body = new HttpParams()
-      .set('client_id', environment.keycloack.clientIdKeycloack)
-      .set('username', user)
-      .set('password', pass)
-      .set('grant_type', 'password');
+  ): Observable<{ access_token: string }> {
 
     const headers = new HttpHeaders({
+      Authorization: 'Basic ' + `${environment.famiWS02.basicAuth}`,
       'Content-Type': 'application/x-www-form-urlencoded',
     });
 
-    return this.http.post<ITokenKeycloackResponse>(url, body.toString(), {
+    const formattedUsername = `${environment.famiWS02.domain}/${user}`;
+
+
+    const body = new HttpParams()
+      .set('grant_type', 'password')
+      .set('username', formattedUsername)
+      .set('password', pass);
+
+
+    return this.http.post<ITokenKeycloackResponse>(this.url, body.toString(), {
       headers: headers,
     });
   }
